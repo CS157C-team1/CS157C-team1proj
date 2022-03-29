@@ -1,0 +1,25 @@
+{
+  "name": "cs157c-team1proj",
+  "version": "1.0.0",
+  "description": "Starflow. E-commerce website for university students made by Team 1 Spring 2022 for CS157C (Mike Wu).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "nodemon index.js",
+    "dev": "cd ../frontend && concurrently \"npm run start\" \"cd ../backend && npm run test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS157C-team1/CS157C-team1proj.git"
+  },
+  "author": "Mark Silva, Ibrahima Wone, Andy Yao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS157C-team1/CS157C-team1proj/issues"
+  },
+  "homepage": "https://github.com/CS157C-team1/CS157C-team1proj#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
