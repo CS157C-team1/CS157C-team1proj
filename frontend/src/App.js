@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import GoogleLoginComponent from "./components/GoogleLoginComponent";
 
 function App() {
+  
+  const testClick = () => {
+    console.log(`BACKEND: ${process.env.REACT_APP_BASE_BACKEND}`)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Basic HomePage</h1>
+      {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
+      <GoogleLoginComponent />
+    <button onClick={ testClick }>CLICK ON ME</button>
     </div>
   );
 }
