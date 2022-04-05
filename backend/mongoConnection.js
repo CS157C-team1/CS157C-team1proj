@@ -12,5 +12,6 @@ client.connect((err) => {
     console.log('Connected to MongoDB server')
 })
 
+const database = client.db('starflow')
 
-module.exports = client;
+module.exports = database;

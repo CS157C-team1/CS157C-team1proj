@@ -13,7 +13,10 @@ app.use(cors({
 }))
 
 const authRoutes = require('./routes/authGoogle')
+const userRoutes = require('./routes/userRoutes')
+
 app.use('/auth', authRoutes)
+app.use('/api/user', userRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello World! Project is Working w/updates')

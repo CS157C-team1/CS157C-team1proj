@@ -1,9 +1,16 @@
 import GoogleLoginComponent from "./components/GoogleLoginComponent";
+import axios from 'axios';
 
 function App() {
   
-  const testClick = () => {
-    console.log(`BACKEND: ${process.env.REACT_APP_BASE_BACKEND}`)
+  const testClick = async (response) => {
+    try {
+      await axios.get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/allUsers`, 
+        { token: response.tokenId},
+        { withCredentials: true })
+      } catch (e) {
+        console.log(e)
+      }
   }
 
   return (
