@@ -40,19 +40,17 @@ const googleLogin = async (req, res) => {
           email: payload.email,
         };
 
+        // TODO: FIND BETTER IMPLEMENTATION FOR STORING OBJECT ID WITH SESSION TOKEN
         // Add User to database if their email is not within the user database.
         // console.log(await UserCollection.getUserByEmailCol(payload.email))
-        const userDB = await UserCollection.getUserByEmailCol(payload.email);
-        if (userDB === null) {
-          UserCollection.insertUserCol(user);
+        if ((await UserCollection.getUserByEmailCol(payload.email)) === null) {
+          await UserCollection.insertUserCol(user);
           console.log("NEW USER ADDED");
-          userDB = await UserCollection.getUserByEmailCol(payload.email);
-          // console.log("USER DB: " + userDB)
         }
 
-        // console.log("USER DB: " + userDB)
+        const userDB = await UserCollection.getUserByEmailCol(payload.email);
         // Create cookie named SESSION_TOKEN that has been encrypted with JWT. Ensure that user stays logged on.
-        await res.cookie(
+        res.cookie(
           "SESSION_TOKEN",
           createJWT(
             userDB.ObjectID,
