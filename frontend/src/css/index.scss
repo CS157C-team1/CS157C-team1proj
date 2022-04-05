@@ -38,23 +38,26 @@ body {
     &:active {
         transform: scale(0.95);
     }
-    &:focus {
-        color: white;
-    }
     &:hover {
         background-color: $olive;
     }
 }
 
 .header {
+    display: flex;
+    justify-content: space-between;
     height: 75px ;
-    width: 100%;
     border-bottom: solid;
-    padding-top: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     padding-left: 100px;
+    padding-right: 50px;
+    button {
+        float: right;
+    }
     h1 {
         font-family: 'Bebas Neue', cursive;
-        font-size: 32px;
+        font-size: 64px;
         margin: 0px;
     }
 }

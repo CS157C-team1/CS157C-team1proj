@@ -42,25 +42,32 @@ body {
           transform: scale(0.95);
 }
 
-.btn:focus {
-  color: white;
-}
-
 .btn:hover {
   background-color: #E7E8D1;
 }
 
 .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   height: 75px;
-  width: 100%;
   border-bottom: solid;
-  padding-top: 50px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   padding-left: 100px;
+  padding-right: 50px;
+}
+
+.header button {
+  float: right;
 }
 
 .header h1 {
   font-family: 'Bebas Neue', cursive;
-  font-size: 32px;
+  font-size: 64px;
   margin: 0px;
 }
 /*# sourceMappingURL=index.css.map */
