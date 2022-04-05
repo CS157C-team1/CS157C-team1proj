@@ -1,9 +1,11 @@
+const JWT = require('jsonwebtoken')
+
 const HTML_ERROR_CODES = {
     400: 'Bad Request',
     404: 'Not Found',
     500: 'Internal Server Error'
 }
-htmlError = (message, statusCode) =>  {
+const htmlError = (message, statusCode) =>  {
     return {
         error: {
             message,
@@ -12,4 +14,15 @@ htmlError = (message, statusCode) =>  {
     }
 }
 
-module.exports = { htmlError } 
+const createJWT = (objectID, email, firstName, lastName) => {
+    return JWT.sign({objectID, email, firstName, lastName}, process.env.JWT_CODE, {expiresIn: '30d'});
+}
+
+const getJWT = (token) => {
+    try{
+        return JWT.verify(token, JWT_CODE)
+    } catch (error) {
+        return null
+    }
+}
+module.exports = { htmlError, createJWT, getJWT } 

@@ -2,12 +2,11 @@
 const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.GOOGLE_CLIENTID)
 
-// Mongo DB Dependency
-const mongoConnection = require("../mongoConnection")
-const userCollection = mongoConnection.collection('users')
+// Access User Collection of MongoDB
+const UserCollection = require('../models/user_model')
 
 // General Helpers
-const { htmlError } = require("../helpers")
+const { htmlError, createJWT } = require("../helpers")
 let statusCode
 
 // Get user information from token acquired from google services.
@@ -27,8 +26,7 @@ const getGooglePayload = async (token) => {
 }
 
 // User is Logged into the the Application. User is added to the the database. 
-// TODO: Create SESSION TOKEN FOR PERSISTENT LOGIN
-// TODO: CHECK IF USER IS ALREADY IN THE SYSTEM BEFORE ADDING THEM
+// Create cookie for user information for persistent log in
 const googleLogin = async (req, res) => {
     try {
         const { token } = req.body
@@ -41,24 +39,40 @@ const googleLogin = async (req, res) => {
                     last_name: payload.family_name,
                     email: payload.email
                 }
-                userCollection.insertOne(user)
-                .then((result) => {
-                    res.json({
-                        status: ok
-                    })
-                }).catch((error) => {
-                    statusCode = 500
-                    res.status(statusCode).json(htmlError(error), statusCode)
+
+                // Add User to database if their email is not within the user database.
+                // console.log(await UserCollection.getUserByEmailCol(payload.email))
+                const userDB = await UserCollection.getUserByEmailCol(payload.email)
+                if(userDB === null)  {
+                    UserCollection.insertUserCol(user)
+                    console.log("NEW USER ADDED")
+                }
+                
+                // Create cookie named SESSION_TOKEN that has been encrypted with JWT. Ensure that user stays logged on.
+                res.cookie('SESSION_TOKEN', createJWT(userDB.ObjectID, userDB.email, userDB.first_name, userDB.last_name), {
+                    maxAge: 365 * 24 * 60 * 60 * 1000,
+                    httpOnly: true,
+                    sameSite: 'strict'
                 })
+
+                // console.log(userDB._id)
                 // console.log(user)
                 // console.log(payload) 
                 // console.log("Added user to DB")
             } else {
-                console.log("Could not get Google payload")
+                statusCode = 400;
+                throw new Error("Invalid Token")
             }
+        } else {
+            statusCode = 400;
+            throw new Error("Token Field is missing")
         }
     } catch (error) {
-        console.log("Could not connect to db")
+        if(!statusCode) {
+            statusCode = 422
+        }
+
+        res.status(statusCode).json(htmlError(error))
     }
 }
 
