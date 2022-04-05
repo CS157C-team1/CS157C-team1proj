@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+body {
+  margin: 0;
+}
+
+.home-layout {
+  height: 100vw;
+  background: url(../images/homepage1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.generic-card {
+  background-color: #A7BEAE;
+}
+
+.header {
+  height: 75px;
+  width: 100%;
+  border-bottom: solid;
+  padding-top: 50px;
+  padding-left: 100px;
+  padding-right: 50px;
+}
+
+.header h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 32px;
+  margin: 0px;
+}
+/*# sourceMappingURL=index.css.map */

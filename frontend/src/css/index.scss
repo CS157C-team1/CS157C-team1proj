@@ -1,0 +1,31 @@
+@import './variables';
+
+body {
+    margin: 0;
+}
+.home-layout{
+    height: 100vw;
+    // width: 100vw;
+    background: url(../images/homepage1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.generic-card {
+    background-color: $cardBGColor;
+}
+
+.header {
+    height: 75px ;
+    width: 100%;
+    border-bottom: solid;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 50px;
+    h1 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 32px;
+        margin: 0px;
+    }
+}
