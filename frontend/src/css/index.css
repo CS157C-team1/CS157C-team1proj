@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
 .item-display {
   border: solid 2px;
-  height: 400px;
+  height: 425px;
   width: 300px;
   margin: 10px;
   padding: 10px;
@@ -24,6 +24,7 @@
           align-items: center;
   border: solid 1px;
   border-radius: 25px;
+  margin-bottom: 10px;
 }
 
 .item-empty-image h1 {
@@ -48,8 +49,20 @@
   margin-top: 20px;
 }
 
+* {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
 body {
   margin: 0;
+  font-family: "Oswald", sans-serif;
 }
 
 .center-div {
@@ -86,7 +99,7 @@ body {
 }
 
 .welcome-card h1 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 64px;
   margin: 0px;
 }
@@ -127,8 +140,31 @@ body {
 }
 
 .header h1 {
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   font-size: 64px;
   margin: 0px;
+}
+
+.navBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: flex;
+}
+
+.navBar button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 20px;
 }
 /*# sourceMappingURL=index.css.map */

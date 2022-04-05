@@ -6,18 +6,6 @@ import ItemTable from "./components/ItemTable";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
-  // const testClick = async (response) => {
-  //   try {
-  //     await axios.get(
-  //       `${process.env.REACT_APP_BASE_BACKEND}/api/user/allUsers`,
-  //       { token: response.tokenId },
-  //       { withCredentials: true }
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const [isUserLoggedOn, setIsUserLoggedOn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -62,7 +50,6 @@ function App() {
           <WelcomeCard updateUser={updateUser} />
           {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
           {/* <div className="generic-card welcome-card"></div> */}
-          {/* <button onClick={testClick}>CLICK ON ME</button> */}
           {/* <img src={homePageImage} alt='University Students'/> */}
         </div>
       )}
