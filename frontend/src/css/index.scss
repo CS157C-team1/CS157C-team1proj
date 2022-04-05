@@ -10,10 +10,30 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    padding-top: 100px;
+    padding-left: 50px;
 }
 
 .generic-card {
     background-color: $cardBGColor;
+}
+
+.welcome-card {
+    width: 500px;
+    height: 350px;
+    border: solid;
+    padding: 10px;
+    h1 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 64px;
+        margin: 0px;
+    }
+}
+
+.btn {
+    border: solid;
+    font-size: 32px;
+    cursor: pointer;
 }
 
 .header {
@@ -22,7 +42,6 @@ body {
     border-bottom: solid;
     padding-top: 50px;
     padding-left: 100px;
-    padding-right: 50px;
     h1 {
         font-family: 'Bebas Neue', cursive;
         font-size: 32px;

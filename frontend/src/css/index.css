@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
 body {
   margin: 0;
 }
@@ -9,10 +9,31 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  padding-top: 100px;
+  padding-left: 50px;
 }
 
 .generic-card {
   background-color: #A7BEAE;
+}
+
+.welcome-card {
+  width: 500px;
+  height: 350px;
+  border: solid;
+  padding: 10px;
+}
+
+.welcome-card h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 64px;
+  margin: 0px;
+}
+
+.btn {
+  border: solid;
+  font-size: 32px;
+  cursor: pointer;
 }
 
 .header {
@@ -21,7 +42,6 @@ body {
   border-bottom: solid;
   padding-top: 50px;
   padding-left: 100px;
-  padding-right: 50px;
 }
 
 .header h1 {

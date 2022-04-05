@@ -1,6 +1,7 @@
 import GoogleLoginComponent from "./components/GoogleLoginComponent";
 import Header from "./components/Header";
 import axios from "axios";
+import WelcomeCard from "./components/WelcomeCard";
 
 function App() {
   const testClick = async (response) => {
@@ -20,9 +21,11 @@ function App() {
     <div>
       <Header />
       <div className="home-layout">
+        <WelcomeCard />
         {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
-        <GoogleLoginComponent />
-        <button onClick={testClick}>CLICK ON ME</button>
+        {/* <GoogleLoginComponent /> */}
+        {/* <div className="generic-card welcome-card"></div> */}
+        {/* <button onClick={testClick}>CLICK ON ME</button> */}
         {/* <img src={homePageImage} alt='University Students'/> */}
       </div>
     </div>
