@@ -1,4 +1,3 @@
-const { htmlError } = require("../helpers");
 const mongoConnection = require("../mongoConnection");
 const userCollection = mongoConnection.collection("users");
 

@@ -6,6 +6,10 @@ body {
     margin: 0;
 }
 
+.center-div {
+    @include flexCenter();
+}
+
 .home-layout{
     height: 100vw;
     // width: 100vw;

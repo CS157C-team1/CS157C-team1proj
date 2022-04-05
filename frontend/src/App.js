@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
 import WelcomeCard from "./components/WelcomeCard";
-import ItemDisplay from "./components/ItemDisplay";
+import ItemTable from "./components/ItemTable";
+// import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
   // const testClick = async (response) => {
@@ -48,15 +49,17 @@ function App() {
   return (
     // style={{backgroundImage:`url(${homePageImage})`}}
     <div>
-      <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser}/>
+      <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser} />
       {isUserLoggedOn ? (
-        <div>
-          <h1>User Logged In</h1>
-          <ItemDisplay />
-        </div>
+        <>
+          <div className="center-div">
+            <ItemTable />
+            {/* <ItemDisplay /> */}
+          </div>
+        </>
       ) : (
         <div className="home-layout">
-          <WelcomeCard updateUser={updateUser}/>
+          <WelcomeCard updateUser={updateUser} />
           {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
           {/* <div className="generic-card welcome-card"></div> */}
           {/* <button onClick={testClick}>CLICK ON ME</button> */}
