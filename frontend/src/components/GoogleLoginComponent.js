@@ -27,7 +27,7 @@ const GoogleLoginComponent = () => {
         onFailure={onFailure}
         onSuccess={onSuccess}
         render={(renderProps) => (
-            <button type="button" onClick={renderProps.onClick} className='btn'>Sign up</button>
+            <button type="button" onClick={renderProps.onClick} className='btn'>Sign up with Google</button>
         )}
     />
     )

@@ -33,6 +33,7 @@ body {
 .btn {
   border: solid;
   font-size: 32px;
+  background-color: #A7BEAE;
   cursor: pointer;
 }
 
