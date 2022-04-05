@@ -45,11 +45,14 @@ const googleLogin = async (req, res) => {
         const userDB = await UserCollection.getUserByEmailCol(payload.email);
         if (userDB === null) {
           UserCollection.insertUserCol(user);
-          // console.log("NEW USER ADDED")
+          console.log("NEW USER ADDED");
+          userDB = await UserCollection.getUserByEmailCol(payload.email);
+          // console.log("USER DB: " + userDB)
         }
 
+        // console.log("USER DB: " + userDB)
         // Create cookie named SESSION_TOKEN that has been encrypted with JWT. Ensure that user stays logged on.
-        res.cookie(
+        await res.cookie(
           "SESSION_TOKEN",
           createJWT(
             userDB.ObjectID,

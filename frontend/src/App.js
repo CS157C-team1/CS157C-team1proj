@@ -25,7 +25,7 @@ function App() {
     await instance
       .get(`${process.env.REACT_APP_BASE_BACKEND}/auth/getCookie`)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if ("SESSION_TOKEN" in res.data.cookies) {
           setIsUserLoggedOn(true);
         } else {
@@ -35,7 +35,7 @@ function App() {
       });
   };
 
-  const getUserData = (childData) => {
+  const updateUser = (childData) => {
     setIsUserLoggedOn(childData);
     setIsLoading(false);
   };
@@ -47,19 +47,19 @@ function App() {
   return (
     // style={{backgroundImage:`url(${homePageImage})`}}
     <div>
-      <Header />
-      {isUserLoggedOn ? ( 
+      <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser}/>
+      {isUserLoggedOn ? (
         <div>
           <h1>User Logged In</h1>
         </div>
       ) : (
-      <div className="home-layout">
-        <WelcomeCard />
-        {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
-        {/* <div className="generic-card welcome-card"></div> */}
-        {/* <button onClick={testClick}>CLICK ON ME</button> */}
-        {/* <img src={homePageImage} alt='University Students'/> */}
-      </div>
+        <div className="home-layout">
+          <WelcomeCard updateUser={updateUser}/>
+          {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
+          {/* <div className="generic-card welcome-card"></div> */}
+          {/* <button onClick={testClick}>CLICK ON ME</button> */}
+          {/* <img src={homePageImage} alt='University Students'/> */}
+        </div>
       )}
     </div>
   );
