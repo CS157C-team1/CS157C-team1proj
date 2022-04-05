@@ -10,6 +10,8 @@ const userCollection = mongoConnection.collection('users')
 const { htmlError } = require("../helpers")
 let statusCode
 
+// Get user information from token acquired from google services.
+// Constains basic information about the user.
 const getGooglePayload = async (token) => {
     try{
         const ticket = await client.verifyIdToken({
@@ -24,6 +26,9 @@ const getGooglePayload = async (token) => {
     }
 }
 
+// User is Logged into the the Application. User is added to the the database. 
+// TODO: Create SESSION TOKEN FOR PERSISTENT LOGIN
+// TODO: CHECK IF USER IS ALREADY IN THE SYSTEM BEFORE ADDING THEM
 const googleLogin = async (req, res) => {
     try {
         const { token } = req.body
