@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const GoogleLoginComponent = () => {
   
-    const onSucess = async (response) => {
+    const onSuccess = async (response) => {
         try {
             await axios.post(`${process.env.REACT_APP_BASE_BACKEND}/auth/login`, 
             { token: response.tokenId},
@@ -25,7 +25,7 @@ const GoogleLoginComponent = () => {
         clientId={process.env.REACT_APP_GOOGLE_CLIENTID}
         buttonText="Log in With Google"
         onFailure={onFailure}
-        onSuccess={onSucess}
+        onSuccess={onSuccess}
     />
     )
 }
