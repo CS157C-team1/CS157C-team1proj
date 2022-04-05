@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ItemDisplay = ({ itemInfo }) => {
     return(
         <div className="item-display">
-            {console.log("IMAGE: " + itemInfo.image)}
+            {/* {console.log("IMAGE: " + itemInfo.image)} */}
             {itemInfo.image == null ? (
                <div className="item-img-size item-empty-image">
                    <h1>NO <br/>IMAGE<br/> FOUND</h1>

@@ -12,7 +12,7 @@ const ItemTable = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res);
+        //   console.log(res);
           setListOfItems(res.data.itemArray);
         });
       // console.log(listOfItems);
