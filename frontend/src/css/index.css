@@ -37,6 +37,19 @@ body {
   cursor: pointer;
 }
 
+.btn:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.btn:focus {
+  color: white;
+}
+
+.btn:hover {
+  background-color: #E7E8D1;
+}
+
 .header {
   height: 75px;
   width: 100%;

@@ -35,6 +35,15 @@ body {
     font-size: 32px;
     background-color: $cardBGColor;
     cursor: pointer;
+    &:active {
+        transform: scale(0.95);
+    }
+    &:focus {
+        color: white;
+    }
+    &:hover {
+        background-color: $olive;
+    }
 }
 
 .header {
