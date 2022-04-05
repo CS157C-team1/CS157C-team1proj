@@ -1,0 +1,25 @@
+@import './mixins';
+
+.item-display {
+    border: solid 2px;
+    height: 400px;
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.item-img-size {
+    width: 300px;
+    height: 200px;
+}
+
+.item-empty-image {
+    @include flexCenter();
+    border: solid 1px;
+    border-radius: 25px;
+    
+    h1 {
+        color: $scarlet;
+        text-align: center;
+    }
+}

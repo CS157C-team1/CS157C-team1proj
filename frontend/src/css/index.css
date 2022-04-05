@@ -1,4 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
+.item-display {
+  border: solid 2px;
+  height: 400px;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.item-img-size {
+  width: 300px;
+  height: 200px;
+}
+
+.item-empty-image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: solid 1px;
+  border-radius: 25px;
+}
+
+.item-empty-image h1 {
+  color: #B85042;
+  text-align: center;
+}
+
 body {
   margin: 0;
 }

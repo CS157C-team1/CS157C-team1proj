@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
 import WelcomeCard from "./components/WelcomeCard";
+import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
   // const testClick = async (response) => {
@@ -51,6 +52,7 @@ function App() {
       {isUserLoggedOn ? (
         <div>
           <h1>User Logged In</h1>
+          <ItemDisplay />
         </div>
       ) : (
         <div className="home-layout">

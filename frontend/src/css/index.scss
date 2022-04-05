@@ -1,8 +1,11 @@
 @import './variables';
+@import './items';
+@import './mixins';
 
 body {
     margin: 0;
 }
+
 .home-layout{
     height: 100vw;
     // width: 100vw;
