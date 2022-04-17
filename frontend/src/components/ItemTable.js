@@ -24,6 +24,7 @@ const ItemTable = () => {
   useEffect(() => {
     getItems();
   });
+  
   return (
     <div className="item-table">
       {Object.keys(listOfItems).map((index) => {
