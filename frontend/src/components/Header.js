@@ -18,7 +18,7 @@ const Header = ({ isUserLoggedOn, updateUser }) => {
         <div className="navBar">
           <h1>Starflow</h1>
           {isUserLoggedOn && (
-            <button className="btn" onClick={onClickAddItem}>
+            <button className="btn headerBGColor" onClick={onClickAddItem}>
               SELL
             </button>
           )}
@@ -26,7 +26,7 @@ const Header = ({ isUserLoggedOn, updateUser }) => {
         {isUserLoggedOn ? (
           <GoogleLogoutComponent updateUser={updateUser} />
         ) : (
-          <GoogleLoginComponent updateUser={updateUser} buttonText="Login" />
+          <GoogleLoginComponent updateUser={updateUser} classStyle="btn-header" buttonText="Login" />
         )}
       </div>
       <AddItemModal showModal={showModal} setShowModal={setShowModal} />

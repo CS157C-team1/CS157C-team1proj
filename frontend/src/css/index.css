@@ -88,13 +88,14 @@ body {
 }
 
 .generic-card {
-  background-color: #A7BEAE;
+  background-color: #6C8E8C;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
+  background-color: #A7BEAE;
   padding: 10px;
 }
 
@@ -104,20 +105,27 @@ body {
   margin: 0px;
 }
 
-.btn {
+.btn, .btn-header {
   border: solid;
   font-size: 32px;
-  background-color: #A7BEAE;
   cursor: pointer;
 }
 
-.btn:active {
+.btn:active, .btn-header:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
 }
 
-.btn:hover {
+.btn:hover, .btn-header:hover {
   background-color: #E7E8D1;
+}
+
+.btn {
+  background-color: #A7BEAE;
+}
+
+.btn-header {
+  background-color: #6C8E8C;
 }
 
 .header {

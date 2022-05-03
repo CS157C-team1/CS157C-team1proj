@@ -35,13 +35,14 @@ body {
 }
 
 .generic-card {
-  background-color: $cardBGColor;
+  background-color: $headerBGColor;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
+  background-color: $cardBGColor;
   padding: 10px;
   h1 {
     font-family: "Oswald", sans-serif;
@@ -50,10 +51,9 @@ body {
   }
 }
 
-.btn {
+%btn {
   border: solid;
   font-size: 32px;
-  background-color: $cardBGColor;
   cursor: pointer;
   &:active {
     transform: scale(0.95);
@@ -61,6 +61,16 @@ body {
   &:hover {
     background-color: $olive;
   }
+}
+
+.btn {
+  @extend %btn;
+  background-color: $cardBGColor;
+}
+
+.btn-header {
+  @extend %btn;
+  background-color: $headerBGColor;
 }
 
 .header {
@@ -101,7 +111,7 @@ body {
 //     line-height: 26px;
 //     margin-bottom: 10px;
 //   }
-  
+
 //   input {
 //     height: 20px;
 //     flex: 0 0 200px;
