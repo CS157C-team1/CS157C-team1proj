@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/ItemTable";
 // import ItemDisplay from "./components/ItemDisplay";
@@ -35,26 +36,39 @@ function App() {
   });
 
   return (
-    // style={{backgroundImage:`url(${homePageImage})`}}
-    <div>
-      <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser} />
-      {isUserLoggedOn ? (
-        <>
-          <div className="center-div">
-            <ItemTable />
-            {/* <ItemDisplay /> */}
-          </div>
-        </>
-      ) : (
-        <div className="home-layout">
-          <WelcomeCard updateUser={updateUser} />
-          {/* <h2>Base Backend: {process.env.REACT_APP_BASE_BACKEND}</h2> */}
-          {/* <div className="generic-card welcome-card"></div> */}
-          {/* <img src={homePageImage} alt='University Students'/> */}
-        </div>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser} />
+              {isUserLoggedOn ? (
+                <>
+                  <div className="center-div">
+                    <ItemTable />
+                    {/* <ItemDisplay /> */}
+                  </div>
+                </>
+              ) : (
+                <div className="home-layout">
+                  <WelcomeCard updateUser={updateUser} />
+                </div>
+              )}
+            </>
+          }
+        ></Route>
+        <Route
+          path="userPage"
+          element={
+            <>
+              <h1>User Information</h1>
+            </>
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App
+export default App;
