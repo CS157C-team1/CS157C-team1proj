@@ -2,9 +2,6 @@
 const express = require("express");
 const router = express.Router();
 
-// Controller
-const AuthController = require("../controllers/auth_controller");
-
 // Google Dependencies
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENTID);
@@ -53,7 +50,7 @@ router.post("/login", async (req, res) => {
           await UserCollection.insertUserCol(user);
           console.log("NEW USER ADDED");
         }
-
+        
         const userDB = await UserCollection.getUserByEmailCol(payload.email);
         // Create cookie named SESSION_TOKEN that has been encrypted with JWT. Ensure that user stays logged on.
         res.cookie(
