@@ -9,7 +9,10 @@ let statusCode;
 // Item Collection Model
 const itemModel = require("../models/item_model");
 
-router.get("/getAllItems", async (req, res) => {
+const { checkUserLoggedIn } = require('./authUser')
+
+router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
+  // TODO: GET ONLY ITEMS that are for sale. 
   try {
     const data = await itemModel.getAllItems();
     // console.log(data)
@@ -24,4 +27,5 @@ router.get("/getAllItems", async (req, res) => {
   }
 });
 
+router.po
 module.exports = router;

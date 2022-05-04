@@ -2,6 +2,7 @@ const JWT = require('jsonwebtoken')
 
 const HTML_ERROR_CODES = {
     400: 'Bad Request',
+    401: 'Not Authorized',
     404: 'Not Found',
     500: 'Internal Server Error'
 }
@@ -20,7 +21,7 @@ const createJWT = (objectID, email, firstName, lastName) => {
 
 const getJWT = (token) => {
     try{
-        return JWT.verify(token, JWT_CODE)
+        return JWT.verify(token, process.env.JWT_CODE)
     } catch (error) {
         return null
     }

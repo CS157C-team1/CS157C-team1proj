@@ -8,4 +8,7 @@ const getAllItems = async () => {
   });
 };
 
+const sellItem = async (item) => {
+  
+}
 module.exports = { getAllItems };
