@@ -23,7 +23,7 @@ const ItemTable = () => {
 
   useEffect(() => {
     getItems();
-  });
+  }, []);
   
   return (
     <div className="item-table">
