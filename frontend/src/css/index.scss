@@ -52,31 +52,13 @@ body {
   }
 }
 
-// %btn
 .btn {
-  border: solid;
-  font-size: 32px;
+  @include btn-general();
   background-color: $shockingYellow;
-  width: fit-content;
-  height: fit-content;
-  cursor: pointer;
-  &:active {
-    transform: scale(0.95);
-  }
   &:hover {
     background-color: $chartreuse;
   }
 }
-
-// .btn {
-//   @extend %btn;
-//   background-color: $shockingYellow;
-// }
-
-// .btn-header {
-//   @extend %btn;
-//   background-color: $shockingYellow;
-// }
 
 .header {
   display: flex;

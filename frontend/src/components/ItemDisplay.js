@@ -16,6 +16,8 @@ const ItemDisplay = ({ itemInfo }) => {
             <h2>${itemInfo.price}</h2>
             <h3>Type: {itemInfo.type}</h3>
             <h3>Condition: {itemInfo.condition}</h3>
+            <button className="btn">Add to Cart</button>
+            <button className="wishlist">Add to Wish List</button>
         </div>
     )   
 };
