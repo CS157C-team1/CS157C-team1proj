@@ -23,11 +23,13 @@ const Header = ({ isUserLoggedOn, updateUser }) => {
             </button>
           )}
         </div>
-        {isUserLoggedOn ? (
-          <GoogleLogoutComponent updateUser={updateUser} />
-        ) : (
-          <GoogleLoginComponent updateUser={updateUser} buttonText="Login" />
-        )}
+        <div className="navBar">
+          {isUserLoggedOn ? (
+            <GoogleLogoutComponent updateUser={updateUser} />
+          ) : (
+            <GoogleLoginComponent updateUser={updateUser} buttonText="Login" />
+          )}
+        </div>
       </div>
       <AddItemModal showModal={showModal} setShowModal={setShowModal} />
     </>

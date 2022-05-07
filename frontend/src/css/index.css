@@ -5,14 +5,24 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 300px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   margin: 10px;
   padding: 10px;
 }
 
+.item-display h2 {
+  font-size: 18px;
+}
+
+.item-display h3 {
+  font-size: 14px;
+}
+
 .item-img-size {
-  width: 300px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
 }
 
 .item-empty-image {
@@ -31,6 +41,7 @@
 }
 
 .item-empty-image h1 {
+  font-size: 32px;
   color: #B85042;
   text-align: center;
 }
@@ -84,6 +95,7 @@
   cursor: pointer;
   margin-top: 10px;
   background-color: #f16775;
+  font-size: 14px;
 }
 
 .btn-wishlist:active {
@@ -152,6 +164,10 @@ body {
   margin: 0px;
 }
 
+.welcome-card button {
+  font-size: 32px;
+}
+
 .btn {
   border: solid;
   font-size: 32px;
@@ -163,6 +179,7 @@ body {
   height: fit-content;
   cursor: pointer;
   background-color: #fee36e;
+  font-size: 14px;
 }
 
 .btn:active {
@@ -216,5 +233,6 @@ body {
 
 .navBar button {
   margin: 20px;
+  font-size: 24px;
 }
 /*# sourceMappingURL=index.css.map */

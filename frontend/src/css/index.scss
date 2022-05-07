@@ -50,11 +50,15 @@ body {
     color: white;
     margin: 0px;
   }
+  button {
+    font-size: 32px;
+  }
 }
 
 .btn {
   @include btn-general();
   background-color: $shockingYellow;
+  font-size: 14px;
   &:hover {
     background-color: $chartreuse;
   }
@@ -86,6 +90,7 @@ body {
   height: 66px;
   button {
     margin: 20px;
+    font-size: 24px;
   }
 }
 

@@ -4,14 +4,20 @@
 .item-display {
     border: solid 2px;
     height: fit-content;
-    width: 300px;
+    width: fit-content;
     margin: 10px;
     padding: 10px;
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 14px;
+    }
 }
 
 .item-img-size {
-    width: 300px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
 }
 
 .item-empty-image {
@@ -21,6 +27,7 @@
     margin-bottom: 10px;
     
     h1 {
+        font-size: 32px;
         color: $scarlet;
         text-align: center;
     }
@@ -31,6 +38,7 @@
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    // grid-template-rows: repeat(auto-fill);
     gap: 10px;
     padding: 0px;
     border: solid 2px;
@@ -43,11 +51,13 @@
     width: auto;
     height: fit-content;
 }
+
 .btn-wishlist {
     @include btn-general();
     margin-top: 10px;
     background-color: $hotPink;
+    font-size: 14px;
     &:hover {
         background-color: $darkPink;
-      }
+    }
 }
