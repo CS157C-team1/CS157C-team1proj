@@ -7,7 +7,7 @@ const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENTID);
 
 // Access User Collection of MongoDB
-const UserCollection = require("../models/user_model");
+const UserCollection = require("../models/UserModel");
 
 // General Helpers
 const { htmlError, createJWT } = require("../helpers");

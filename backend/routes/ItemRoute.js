@@ -7,9 +7,9 @@ const { htmlError } = require("../helpers");
 let statusCode;
 
 // Item Collection Model
-const itemModel = require("../models/item_model");
+const itemModel = require("../models/ItemModel");
 
-const { checkUserLoggedIn } = require('./authUser')
+const { checkUserLoggedIn } = require('./AuthUser')
 
 router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
   // TODO: GET ONLY ITEMS that are for sale. 

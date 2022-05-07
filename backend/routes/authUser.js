@@ -1,4 +1,4 @@
-const User = require('../models/user_model')
+const User = require('../models/UserModel')
 const { htmlError, getJWT } = require('../helpers');
 
 // Verify that a User has been logged on using the SESSION_TOKEN
