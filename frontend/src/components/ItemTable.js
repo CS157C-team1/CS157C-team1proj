@@ -5,6 +5,8 @@ import ItemDisplay from "./ItemDisplay";
 
 const ItemTable = () => {
   const [listOfItems, setListOfItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
   const getItems = async () => {
     try {
       await axios
@@ -12,10 +14,24 @@ const ItemTable = () => {
           withCredentials: true,
         })
         .then((res) => {
-        //   console.log(res);
+          console.log(res)
           setListOfItems(res.data.itemArray);
         });
-      // console.log(listOfItems);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const getItemsInCart = async () => {
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getCart`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setCartItems(res.data.cartItems);
+        });
+      console.log("Cart Items: " + cartItems);
     } catch (error) {
       console.log(error.message);
     }
@@ -23,12 +39,19 @@ const ItemTable = () => {
 
   useEffect(() => {
     getItems();
+    getItemsInCart();
   }, []);
-  
+
   return (
     <div className="item-table">
       {Object.keys(listOfItems).map((index) => {
-        return <ItemDisplay itemInfo={listOfItems[index]} />;
+        return (
+          <ItemDisplay
+            itemInfo={listOfItems[index]}
+            cartItems={cartItems}
+            refreshItems={getItemsInCart}
+          />
+        );
       })}
     </div>
   );

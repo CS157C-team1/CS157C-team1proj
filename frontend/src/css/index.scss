@@ -94,6 +94,17 @@ body {
   }
 }
 
+.div-btn-disabled {
+  @include btn-general;
+  font-size: 14px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
 // label {
 //     display: flex;
 //     flex-direction: row;

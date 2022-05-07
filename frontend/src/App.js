@@ -16,7 +16,7 @@ function App() {
     await instance
       .get(`${process.env.REACT_APP_BASE_BACKEND}/auth/getCookie`)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if ("SESSION_TOKEN" in res.data.cookies) {
           setIsUserLoggedOn(true);
         } else {
