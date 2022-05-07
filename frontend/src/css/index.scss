@@ -35,48 +35,53 @@ body {
 }
 
 .generic-card {
-  background-color: $headerBGColor;
+  background-color: $electricBlue;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
-  background-color: $cardBGColor;
+  background-color: $electricBlue;
   padding: 10px;
   h1 {
     font-family: "Oswald", sans-serif;
     font-size: 64px;
+    color: white;
     margin: 0px;
   }
 }
 
-%btn {
+// %btn
+.btn {
   border: solid;
   font-size: 32px;
+  background-color: $shockingYellow;
+  width: fit-content;
+  height: fit-content;
   cursor: pointer;
   &:active {
     transform: scale(0.95);
   }
   &:hover {
-    background-color: $olive;
+    background-color: $chartreuse;
   }
 }
 
-.btn {
-  @extend %btn;
-  background-color: $cardBGColor;
-}
+// .btn {
+//   @extend %btn;
+//   background-color: $shockingYellow;
+// }
 
-.btn-header {
-  @extend %btn;
-  background-color: $headerBGColor;
-}
+// .btn-header {
+//   @extend %btn;
+//   background-color: $shockingYellow;
+// }
 
 .header {
   display: flex;
   justify-content: space-between;
-  height: 75px;
+  height: 50px;
   border-bottom: solid;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -88,6 +93,7 @@ body {
   h1 {
     font-family: "Bebas Neue", cursive;
     font-size: 64px;
+    color: white;
     margin: 0px;
   }
 }
@@ -95,9 +101,8 @@ body {
 .navBar {
   @include flexCenter();
   display: flex;
+  height: 66px;
   button {
-    width: fit-content;
-    height: fit-content;
     margin: 20px;
   }
 }

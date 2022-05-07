@@ -88,44 +88,44 @@ body {
 }
 
 .generic-card {
-  background-color: #6C8E8C;
+  background-color: #373e98;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
-  background-color: #A7BEAE;
+  background-color: #373e98;
   padding: 10px;
 }
 
 .welcome-card h1 {
   font-family: "Oswald", sans-serif;
   font-size: 64px;
+  color: white;
   margin: 0px;
 }
 
-.btn, .btn-header {
+.btn {
   border: solid;
   font-size: 32px;
+  background-color: #fee36e;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   cursor: pointer;
 }
 
-.btn:active, .btn-header:active {
+.btn:active {
   -webkit-transform: scale(0.95);
           transform: scale(0.95);
 }
 
-.btn:hover, .btn-header:hover {
-  background-color: #E7E8D1;
-}
-
-.btn {
-  background-color: #A7BEAE;
-}
-
-.btn-header {
-  background-color: #6C8E8C;
+.btn:hover {
+  background-color: #ceb92c;
 }
 
 .header {
@@ -135,7 +135,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 75px;
+  height: 50px;
   border-bottom: solid;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -150,6 +150,7 @@ body {
 .header h1 {
   font-family: "Bebas Neue", cursive;
   font-size: 64px;
+  color: white;
   margin: 0px;
 }
 
@@ -164,15 +165,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   display: flex;
+  height: 66px;
 }
 
 .navBar button {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   margin: 20px;
 }
 /*# sourceMappingURL=index.css.map */
