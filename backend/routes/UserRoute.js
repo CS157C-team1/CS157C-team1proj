@@ -22,7 +22,6 @@ router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
     if (!htmlCode) {
       htmlCode = 422;
     }
-
     res.status(htmlCode).json(jsonError(error.message, htmlCode));
   }
 });
