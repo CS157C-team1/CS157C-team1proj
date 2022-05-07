@@ -37,8 +37,17 @@
     margin-top: 20px;
 }
 
-.wishlist {
+.item-btn-div{
+    @include flexCenter();
+    flex-direction: column;
+    width: auto;
+    height: fit-content;
+}
+.btn-wishlist {
     @include btn-general();
     margin-top: 10px;
     background-color: $hotPink;
+    &:hover {
+        background-color: $darkPink;
+      }
 }
