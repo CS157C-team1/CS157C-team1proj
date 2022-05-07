@@ -1,7 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 const ItemDisplay = ({ itemInfo }) => {
+
+  const addItemToCart = async (e) => {
+    const instance = axios.create({ withCredentials: true });
+    await instance.post(
+      `${process.env.REACT_APP_BASE_BACKEND}/api/user/addCart/` + itemInfo._id,
+      { itemId: itemInfo._id }
+    ).catch(error => {
+      console.log(error.message)
+    });
+  };
+
   return (
     <div className="item-display">
       {/* {console.log("IMAGE: " + itemInfo.image)} */}
@@ -21,7 +33,7 @@ const ItemDisplay = ({ itemInfo }) => {
       <h3>Type: {itemInfo.type}</h3>
       <h3>Condition: {itemInfo.condition}</h3>
       <div className="item-btn-div">
-        <button className="btn">Add to Cart</button>
+        <button className="btn" onClick={addItemToCart}>Add to Cart</button>
         <button className="btn-wishlist">Add to Wish List</button>
       </div>
     </div>

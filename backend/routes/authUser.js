@@ -1,7 +1,8 @@
 const User = require('../models/UserModel')
 const { htmlError, getJWT } = require('../helpers');
 
-// Verify that a User has been logged on using the SESSION_TOKEN
+// Verify that a User has been logged on using the SESSION_TOKEN. Can also reference req.user that contains user information
+// anywhere this function has been triggered
 const checkUserLoggedIn = async (req, res, next) => {
     let htmlCode = null;
     try{
