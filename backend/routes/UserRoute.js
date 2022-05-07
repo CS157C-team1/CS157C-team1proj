@@ -11,8 +11,6 @@ const { checkUserLoggedIn } = require("./AuthUser");
 router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    console.log(req.user._id.toString());
-    console.log(req.body.itemId);
     const itemId = req.body.itemId;
     if (itemId) {
       User.addItemToCart(req.user._id.toString(), itemId);
