@@ -29,14 +29,13 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
         <div className="navBar">
           {isUserLoggedOn ? (
             <>
-            <GoogleLogoutComponent updateUser={updateUser} />
-            <Link to="userpage">
-            <img
-              src={userInfo.profile_pic_url}
-              alt="User"
-            ></img>
-          </Link>
-          </>
+              <Link to="/">
+                <GoogleLogoutComponent updateUser={updateUser} />
+              </Link>
+              <Link to="userpage">
+                <img src={userInfo.profile_pic_url} alt="User"></img>
+              </Link>
+            </>
           ) : (
             <GoogleLoginComponent updateUser={updateUser} buttonText="Login" />
           )}
@@ -53,8 +52,9 @@ Header.defaultProps = {
     first_name: "GENERIC FN",
     last_name: "GENERIC LN",
     email: "123@email.com",
-    profile_pic_url: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
-  }
+    profile_pic_url:
+      "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+  },
 };
 
 Header.propTypes = {
