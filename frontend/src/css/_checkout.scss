@@ -63,10 +63,21 @@
   border-width: 2px;
   border-color: $shockingYellow;
   padding: 10px;
+
+  .div-title {
+    float: left;
+    margin-right: 50px;
+  }
+
+  .div-number {
+    float: right;
+    text-align: right;
+  }
+
   h1 {
     font-size: 24px;
   }
   h2 {
-    font-size: 16px
+    font-size: 16px;
   }
 }

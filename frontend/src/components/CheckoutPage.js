@@ -60,11 +60,30 @@ const CheckoutPage = ({}) => {
           </div>
           <div className="checkout-page-div-right">
             <h1>Order Summary</h1>
-            <h2>
-              Items ({cartItems.length}): ${totalPrice}
-            </h2>
-            <h2>Estimated Taxes (15%): ${totalPrice * 0.15}</h2>
-            <h1>Total: ${totalPrice + totalPrice * 0.15}</h1>
+            <div>
+              <div className="div-title">
+                <h2>Items ({cartItems.length}):</h2>
+              </div>
+              <div className="div-number">
+                <h2>${totalPrice}</h2>
+              </div>
+            </div>
+            <div>
+              <div className="div-title">
+                <h2>Estimated Taxes (15%):</h2>
+              </div>
+              <div className="div-number">
+                <h2>${totalPrice * 0.15}</h2>
+              </div>
+            </div>
+            <div>
+              <div className="div-title">
+                <h1>Total:</h1>
+              </div>
+              <div className="div-number">
+                <h1>${totalPrice + totalPrice * 0.15}</h1>
+              </div>
+            </div>
             <button className="btn">Checkout</button>
           </div>
         </>

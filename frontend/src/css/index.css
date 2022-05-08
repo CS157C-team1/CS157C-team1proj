@@ -235,6 +235,16 @@
   padding: 10px;
 }
 
+.checkout-page-div-right .div-title {
+  float: left;
+  margin-right: 50px;
+}
+
+.checkout-page-div-right .div-number {
+  float: right;
+  text-align: right;
+}
+
 .checkout-page-div-right h1 {
   font-size: 24px;
 }
