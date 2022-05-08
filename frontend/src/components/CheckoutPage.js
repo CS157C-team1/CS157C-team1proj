@@ -5,6 +5,7 @@ import CheckoutRow from "./CheckoutRow";
 
 const CheckoutPage = ({}) => {
   const [cartItems, setCartItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // Gets Object Ids of items of user in cart
   const getItemsInCart = async () => {
@@ -14,7 +15,7 @@ const CheckoutPage = ({}) => {
           withCredentials: true,
         })
         .then((res) => {
-          // Get Actual Item Collection
+          // Get Actual Item Collection information
           getItemInfo(res.data.cartItems);
         });
     } catch (error) {
@@ -32,6 +33,8 @@ const CheckoutPage = ({}) => {
         })
         .then((res) => {
           setCartItems(res.data.cartItemData);
+          setTotalPrice(res.data.totalPrice);
+          console.log(cartItems);
         });
     } catch (error) {}
   };
@@ -57,9 +60,11 @@ const CheckoutPage = ({}) => {
           </div>
           <div className="checkout-page-div-right">
             <h1>Order Summary</h1>
-            <h2>Items: </h2>
-            <h2>Estimated Taxes: </h2>
-            <h1>Total: </h1>
+            <h2>
+              Items ({cartItems.length}): ${totalPrice}
+            </h2>
+            <h2>Estimated Taxes (15%): ${totalPrice * 0.15}</h2>
+            <h1>Total: ${totalPrice + totalPrice * 0.15}</h1>
             <button className="btn">Checkout</button>
           </div>
         </>

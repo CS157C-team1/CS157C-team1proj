@@ -17,4 +17,13 @@ const getItemsByObjId = async (listOfItemObjIds) => {
   });
 };
 
-module.exports = { getAllItems, getItemsByObjId };
+// TODO: Could be possible to be done with aggregation. Not sure which method is
+// better
+const getTotalPriceOfItems = async (listOfItemJsonObjs) => {
+  var totalPrice = 0;
+  listOfItemJsonObjs.forEach((itemObj) => {
+    totalPrice = itemObj.price + totalPrice;
+  });
+  return await totalPrice;
+};
+module.exports = { getAllItems, getItemsByObjId, getTotalPriceOfItems };

@@ -33,8 +33,10 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
     const listOfItemObjIds = req.query.listOfItemObjIds;
     if (listOfItemObjIds != null) {
       const data = await itemModel.getItemsByObjId(listOfItemObjIds);
+      const totalPrice = await itemModel.getTotalPriceOfItems(data);
       res.json({
         cartItemData: data,
+        totalPrice: totalPrice,
         status: "Ok",
         message: "Able to retrieve Item Information",
       });
