@@ -67,6 +67,11 @@ function App() {
           path="userPage"
           element={
             <>
+              <Header
+                isUserLoggedOn={isUserLoggedOn}
+                updateUser={checkUserLoggedIn}
+                userInfo={userInfo}
+              />
               <UserPage />
             </>
           }
