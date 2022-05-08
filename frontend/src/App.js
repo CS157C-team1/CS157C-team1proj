@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/ItemTable";
+import ProductPage from "./components/ProductPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
@@ -63,6 +64,15 @@ function App() {
           element={
             <>
               <h1>User Information</h1>
+            </>
+          }
+        ></Route>
+        <Route
+          path="Product/:id"
+          element={
+            <>
+              <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser} />
+              <ProductPage />
             </>
           }
         ></Route>

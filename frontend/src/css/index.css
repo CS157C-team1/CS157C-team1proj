@@ -175,4 +175,23 @@ body {
   height: fit-content;
   margin: 20px;
 }
+
+.item-display-name{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#productcard{
+  align-items: center;
+  text-align: center;
+  display: inline;
+  border: none;
+  margin: none;
+  padding: none;
+}
+
+#productimg{
+  display:inline;
+  border:none;
+}
 /*# sourceMappingURL=index.css.map */
