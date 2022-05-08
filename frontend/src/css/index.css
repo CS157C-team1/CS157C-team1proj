@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
 .item-display {
   border: solid 2px;
   height: -webkit-fit-content;
@@ -136,6 +137,87 @@
 
 .btn-remove:hover {
   background-color: darkgray;
+}
+
+.checkout-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  margin-bottom: 10px;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.checkout-row .checkout-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 250px;
+  width: 250px;
+  border: solid 1px;
+  border-radius: 25px;
+  margin: 10px;
+}
+
+.checkout-row .checkout-img h1 {
+  font-size: 32px;
+  color: #B85042;
+  text-align: center;
+}
+
+.checkout-row .item-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px;
+}
+
+.checkout-row .item-info h1 {
+  font-size: 32px;
+}
+
+.checkout-row .item-info h2 {
+  font-size: 24px;
+}
+
+.checkout-row .div-top-right {
+  height: 100%;
+}
+
+.checkout-row .div-top-right img {
+  float: right;
+  height: 25px;
+  margin: 10px;
+  width: auto;
 }
 
 * {
