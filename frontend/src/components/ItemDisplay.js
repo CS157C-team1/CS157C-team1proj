@@ -17,6 +17,20 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshItems }) => {
     refreshItems();
   };
 
+  const removeItemFromCart = async (e) => {
+    const instance = axios.create({ withCredentials: true });
+    await instance
+      .delete(
+        `${process.env.REACT_APP_BASE_BACKEND}/api/user/deleteCart/` +
+          itemInfo._id,
+        { itemId: itemInfo._id }
+      )
+      .catch((error) => {
+        console.log(error.message);
+      });
+    refreshItems();
+  };
+
   return (
     <div className="item-display">
       {/* {console.log("IMAGE: " + itemInfo.image)} */}
@@ -38,13 +52,20 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshItems }) => {
       <div className="item-btn-div">
         {/* Check if Items is in Cart, if it is do not allow user to reclick button */}
 
-        {cartItems == null || cartItems.includes(itemInfo._id) ? (
-          <div className="div-btn-disabled">Item already in Cart</div>
+        {cartItems == null ? (
+          <button className="btn" onClick={addItemToCart}>
+            Add to Cart
+          </button>
+        ) : cartItems.includes(itemInfo._id) ? (
+          <button className="btn-remove" onClick={removeItemFromCart}>
+            Remove Item From Cart
+          </button>
         ) : (
           <button className="btn" onClick={addItemToCart}>
             Add to Cart
           </button>
         )}
+
         <button className="btn-wishlist">Add to Wish List</button>
       </div>
     </div>
@@ -57,6 +78,7 @@ ItemDisplay.defaultProps = {
     condition: "Somewhat Used",
     type: "Electronics",
     price: "750",
+    cartItems: [],
   },
 };
 

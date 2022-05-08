@@ -61,3 +61,12 @@
         background-color: $darkPink;
     }
 }
+
+.btn-remove {
+    @include btn-general();
+    background-color: lightgray;
+    font-size: 14px;
+    &:hover{
+        background-color: darkgray;
+    }
+}

@@ -47,5 +47,26 @@ router.get("/getCart", checkUserLoggedIn, async (req, res) => {
     res.status(htmlCode).json(htmlError(error.message, htmlCode));
   }
 });
-module.exports = router;
 
+router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
+  let htmlCode = null;
+  try {
+    const itemId = req.params.itemId;
+    if(itemId) {
+      User.removeItemFromCart(req.user._id.toString(), itemId)
+      res.json({
+        status: "Ok",
+        message: "Item successfully deleted"
+      })
+    } else {
+      htmlCode = 400;
+      throw new Error("Missing Item ID");
+    }
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+module.exports = router;

@@ -14,7 +14,6 @@ const ItemTable = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res)
           setListOfItems(res.data.itemArray);
         });
     } catch (error) {
@@ -31,7 +30,6 @@ const ItemTable = () => {
         .then((res) => {
           setCartItems(res.data.cartItems);
         });
-      console.log("Cart Items: " + cartItems);
     } catch (error) {
       console.log(error.message);
     }

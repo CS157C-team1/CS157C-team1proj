@@ -38,17 +38,23 @@ const getItemsInCart = async (userObjId) => {
   const cursor = userCollection
     .find({ _id: ObjectId(userObjId) })
     .project({ itemCart: 1, _id: 0 });
-  return await cursor
-    .toArray()
-    .catch((error) => {
-      throw new Error(error.message);
-    });
+  return await cursor.toArray().catch((error) => {
+    throw new Error(error.message);
+  });
 };
 
+const removeItemFromCart = async (userObjId, itemObjID) => {
+  const filter = { _id: ObjectId(userObjId) };
+  const updateDoc = { $pull: { itemCart: ObjectId(itemObjID) } };
+  userCollection.updateOne(filter, updateDoc).catch((error) => {
+    throw new Error(error.message);
+  });
+};
 module.exports = {
   getAllUsersCol,
   insertUserCol,
   getUserByEmailCol,
   addItemToCart,
   getItemsInCart,
+  removeItemFromCart
 };

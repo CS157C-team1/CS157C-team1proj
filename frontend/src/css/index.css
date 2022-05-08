@@ -107,6 +107,29 @@
   background-color: #d95d69;
 }
 
+.btn-remove {
+  border: solid;
+  font-size: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  cursor: pointer;
+  background-color: lightgray;
+  font-size: 14px;
+}
+
+.btn-remove:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.btn-remove:hover {
+  background-color: darkgray;
+}
+
 * {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -234,29 +257,5 @@ body {
 .navBar button {
   margin: 20px;
   font-size: 24px;
-}
-
-.div-btn-disabled {
-  border: solid;
-  font-size: 32px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  cursor: pointer;
-  font-size: 14px;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  background-color: lightgray;
-  cursor: not-allowed;
-}
-
-.div-btn-disabled:active {
-  -webkit-transform: scale(0.95);
-          transform: scale(0.95);
 }
 /*# sourceMappingURL=index.css.map */
