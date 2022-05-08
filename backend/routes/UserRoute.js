@@ -6,8 +6,6 @@ const { checkUserLoggedIn } = require("./AuthUser");
 
 // Link: /api/user/...
 
-// router.get('/allUsers', User.getAllUsers)
-
 // Add item to Cart of the User using the ObjectID
 router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;

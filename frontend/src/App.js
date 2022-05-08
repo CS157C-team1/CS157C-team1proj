@@ -4,10 +4,12 @@ import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/ItemTable";
+import UserPage from "./components/UserPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
   const [isUserLoggedOn, setIsUserLoggedOn] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check Cookies for SESSION TOKEN
@@ -18,17 +20,14 @@ function App() {
       .then((res) => {
         // console.log(res);
         if ("SESSION_TOKEN" in res.data.cookies) {
+          setUserInfo(res.data.user);
           setIsUserLoggedOn(true);
         } else {
           setIsUserLoggedOn(false);
+          setUserInfo(null);
         }
         setIsLoading(false);
       });
-  };
-
-  const updateUser = (childData) => {
-    setIsUserLoggedOn(childData);
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -42,7 +41,11 @@ function App() {
           path="/"
           element={
             <>
-              <Header isUserLoggedOn={isUserLoggedOn} updateUser={updateUser} />
+              <Header
+                isUserLoggedOn={isUserLoggedOn}
+                updateUser={checkUserLoggedIn}
+                userInfo={userInfo}
+              />
               {isUserLoggedOn ? (
                 <>
                   <div className="center-div">
@@ -51,9 +54,11 @@ function App() {
                   </div>
                 </>
               ) : (
-                <div className="home-layout">
-                  <WelcomeCard updateUser={updateUser} />
-                </div>
+                <>
+                  <div className="home-layout">
+                    <WelcomeCard updateUser={checkUserLoggedIn} />
+                  </div>
+                </>
               )}
             </>
           }
@@ -62,7 +67,7 @@ function App() {
           path="userPage"
           element={
             <>
-              <h1>User Information</h1>
+              <UserPage />
             </>
           }
         ></Route>

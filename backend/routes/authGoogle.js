@@ -10,7 +10,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENTID);
 const UserCollection = require("../models/UserModel");
 
 // General Helpers
-const { htmlError, createJWT } = require("../helpers");
+const { htmlError, createJWT, getJWT } = require("../helpers");
 let statusCode;
 
 // Get user information from token acquired from google services.
@@ -40,6 +40,7 @@ router.post("/login", async (req, res) => {
         const user = {
           first_name: payload.given_name,
           last_name: payload.family_name,
+          profile_pic_url: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
           email: payload.email,
         };
 
@@ -59,7 +60,8 @@ router.post("/login", async (req, res) => {
             userDB.ObjectID,
             userDB.email,
             userDB.first_name,
-            userDB.last_name
+            userDB.last_name,
+            userDB.profile_pic_url
           ),
           {
             maxAge: 365 * 24 * 60 * 60 * 1000,
@@ -94,6 +96,7 @@ router.get("/getCookie", (req, res) => {
   res.json({
     status: "ok",
     cookies: req.cookies,
+    user: getJWT(req.cookies.SESSION_TOKEN)
   });
 });
 
