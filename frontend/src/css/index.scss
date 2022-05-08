@@ -94,10 +94,41 @@ body {
   }
 
   img {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    height: 30px;
   };
+
+  .img-round {
+    border-radius: 50%;
+  }
+
+  .cart {
+    background-color: $shockingYellow;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $chartreuse;
+    }
+    // border: 3px;
+  }
+
+  .wish {
+    background-color: $hotPink;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    margin-right: 10px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $darkPink
+    }
+    // border: 3px;
+  }
 }
 
 // .div-btn-disabled {

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import GoogleLogoutComponent from "./GoogleLogoutComponent";
 import GoogleLoginComponent from "./GoogleLoginComponent";
 import AddItemModal from "./modals/AddItemModal";
+import shoppingCart from "../images/shoppingCart.png";
+import wishListIcon from "../images/wishIcon.png";
 import { Link } from "react-router-dom";
 
 const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
@@ -29,11 +31,21 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
         <div className="navBar">
           {isUserLoggedOn ? (
             <>
+              <Link to="/wishlist">
+                <img src={wishListIcon} alt="heart" className="wish"></img>
+              </Link>
+              <Link to="/cart">
+                <img src={shoppingCart} alt="cart" className="cart"></img>
+              </Link>
               <Link to="/">
                 <GoogleLogoutComponent updateUser={updateUser} />
               </Link>
-              <Link to="userpage">
-                <img src={userInfo.profile_pic_url} alt="User"></img>
+              <Link to="/userpage">
+                <img
+                  src={userInfo.profile_pic_url}
+                  alt="User"
+                  className="img-round"
+                ></img>
               </Link>
             </>
           ) : (

@@ -272,8 +272,43 @@ body {
 }
 
 .navBar img {
+  height: 30px;
+}
+
+.navBar .img-round {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+}
+
+.navBar .cart {
+  background-color: #fee36e;
+  border: solid;
+  border-color: black;
+  padding: 5px;
+}
+
+.navBar .cart:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.navBar .cart:hover {
+  background-color: #ceb92c;
+}
+
+.navBar .wish {
+  background-color: #f16775;
+  border: solid;
+  border-color: black;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.navBar .wish:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.navBar .wish:hover {
+  background-color: #d95d69;
 }
 /*# sourceMappingURL=index.css.map */
