@@ -47,7 +47,7 @@ const ItemTable = () => {
           <ItemDisplay
             itemInfo={listOfItems[index]}
             cartItems={cartItems}
-            refreshItems={getItemsInCart}
+            refreshCart={getItemsInCart}
           />
         );
       })}

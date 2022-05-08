@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const ItemDisplay = ({ itemInfo, cartItems, refreshItems }) => {
+const ItemDisplay = ({ itemInfo, cartItems, refreshCart }) => {
   const addItemToCart = async (e) => {
     const instance = axios.create({ withCredentials: true });
     await instance
@@ -14,7 +14,7 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshItems }) => {
       .catch((error) => {
         console.log(error.message);
       });
-    refreshItems();
+    refreshCart();
   };
 
   const removeItemFromCart = async (e) => {
@@ -28,7 +28,7 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshItems }) => {
       .catch((error) => {
         console.log(error.message);
       });
-    refreshItems();
+    refreshCart();
   };
 
   return (
