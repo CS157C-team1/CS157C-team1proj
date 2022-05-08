@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import GoogleLogoutComponent from "./GoogleLogoutComponent";
-import GoogleLoginComponent from "./GoogleLoginComponent";
+import GoogleLogoutComponent from "./google/GoogleLogoutComponent";
+import GoogleLoginComponent from "./google/GoogleLoginComponent";
 import AddItemModal from "./modals/AddItemModal";
 import shoppingCart from "../images/shoppingCart.png";
 import wishListIcon from "../images/wishIcon.png";

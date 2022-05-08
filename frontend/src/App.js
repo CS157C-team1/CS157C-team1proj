@@ -3,8 +3,9 @@ import Header from "./components/Header";
 import axios from "axios";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
-import ItemTable from "./components/ItemTable";
+import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
+import CheckoutPage from "./components/CheckoutPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
@@ -85,7 +86,11 @@ function App() {
                 updateUser={checkUserLoggedIn}
                 userInfo={userInfo}
               />
-              <h1>Shopping Cart</h1>
+              <div className="center-div">
+                <div>
+                  <CheckoutPage></CheckoutPage>
+                </div>
+              </div>
             </>
           }
         ></Route>
