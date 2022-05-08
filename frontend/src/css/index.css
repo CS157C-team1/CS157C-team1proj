@@ -92,6 +92,10 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
   cursor: pointer;
   margin-top: 10px;
   background-color: #f16775;
@@ -116,6 +120,10 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
   cursor: pointer;
   background-color: lightgray;
   font-size: 14px;
@@ -200,6 +208,10 @@ body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
   cursor: pointer;
   background-color: #fee36e;
   font-size: 14px;
