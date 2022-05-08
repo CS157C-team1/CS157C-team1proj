@@ -42,12 +42,28 @@ const CheckoutPage = ({}) => {
 
   return (
     <>
-      <h1>Checkout Page: </h1>
-      {Object.keys(cartItems).map((index) => {
-        return <CheckoutRow itemInfo={cartItems[index]}></CheckoutRow>;
-      })}
-      <CheckoutRow></CheckoutRow>
-      <CheckoutRow></CheckoutRow>
+      {cartItems == null || cartItems.length == 0 ? (
+        <div className="checkout-page-div-left">
+          <h1>Checkout Page: </h1>
+          <h2>No Items In Cart</h2>
+        </div>
+      ) : (
+        <>
+          <div className="checkout-page-div-left">
+            <h1>Checkout Page: </h1>
+            {Object.keys(cartItems).map((index) => {
+              return <CheckoutRow itemInfo={cartItems[index]}></CheckoutRow>;
+            })}
+          </div>
+          <div className="checkout-page-div-right">
+            <h1>Order Summary</h1>
+            <h2>Items: </h2>
+            <h2>Estimated Taxes: </h2>
+            <h1>Total: </h1>
+            <button className="btn">Checkout</button>
+          </div>
+        </>
+      )}
     </>
   );
 };

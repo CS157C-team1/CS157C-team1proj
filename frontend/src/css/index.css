@@ -220,6 +220,29 @@
   width: auto;
 }
 
+.checkout-page-div-left {
+  float: left;
+  margin: 10px;
+}
+
+.checkout-page-div-right {
+  float: right;
+  margin-left: 50px;
+  margin-top: 65px;
+  border: solid;
+  border-width: 2px;
+  border-color: #fee36e;
+  padding: 10px;
+}
+
+.checkout-page-div-right h1 {
+  font-size: 24px;
+}
+
+.checkout-page-div-right h2 {
+  font-size: 16px;
+}
+
 * {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
