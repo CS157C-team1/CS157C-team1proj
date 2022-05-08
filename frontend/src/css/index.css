@@ -279,6 +279,10 @@ body {
   border-radius: 50%;
 }
 
+.navBar .profile-pic {
+  height: 50px;
+}
+
 .navBar .cart {
   background-color: #fee36e;
   border: solid;

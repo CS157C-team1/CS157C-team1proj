@@ -44,7 +44,7 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
                 <img
                   src={userInfo.profile_pic_url}
                   alt="User"
-                  className="img-round"
+                  className="img-round profile-pic"
                 ></img>
               </Link>
             </>
