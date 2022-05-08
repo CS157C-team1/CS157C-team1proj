@@ -6,6 +6,7 @@ import ItemDisplay from "./ItemDisplay";
 const ItemTable = () => {
   const [listOfItems, setListOfItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [wishItems, setWishItems] = useState([]);
 
   const getItems = async () => {
     try {
@@ -35,9 +36,24 @@ const ItemTable = () => {
     }
   };
 
+  const getItemsInWishList = async () => {
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getWishList`, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          setWishItems(res.data.wishListItems);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     getItems();
     getItemsInCart();
+    getItemsInWishList();
   }, []);
 
   return (
@@ -47,7 +63,9 @@ const ItemTable = () => {
           <ItemDisplay
             itemInfo={listOfItems[index]}
             cartItems={cartItems}
+            wishItems={wishItems}
             refreshCart={getItemsInCart}
+            refreshWishList={getItemsInWishList}
           />
         );
       })}

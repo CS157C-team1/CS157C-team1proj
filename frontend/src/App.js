@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     checkUserLoggedIn();
-  });
+  }, []);
 
   return (
     <BrowserRouter>

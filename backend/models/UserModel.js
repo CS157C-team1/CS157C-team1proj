@@ -50,11 +50,40 @@ const removeItemFromCart = async (userObjId, itemObjID) => {
     throw new Error(error.message);
   });
 };
+
+const addItemToWishList = async (userObjId, itemObjID) => {
+  const filter = { _id: ObjectId(userObjId) };
+  const updateDocument = { $addToSet: { wishlist: ObjectId(itemObjID) } };
+  await userCollection.updateOne(filter, updateDocument).catch((error) => {
+    throw new Error(error.message);
+  });
+};
+
+const getItemsInWishList = async (userObjId) => {
+  const cursor = userCollection
+    .find({ _id: ObjectId(userObjId) })
+    .project({ wishlist: 1, _id: 0 });
+  return await cursor.toArray().catch((error) => {
+    throw new Error(error.message);
+  });
+}; 
+
+const removeItemsFromWishList = async (userObjId, itemObjID) => {
+  const filter = { _id: ObjectId(userObjId) };
+  const updateDoc = { $pull: { wishlist: ObjectId(itemObjID) } };
+  userCollection.updateOne(filter, updateDoc).catch((error) => {
+    throw new Error(error.message);
+  });
+};
+
 module.exports = {
   getAllUsersCol,
   insertUserCol,
   getUserByEmailCol,
   addItemToCart,
   getItemsInCart,
-  removeItemFromCart
+  removeItemFromCart,
+  addItemToWishList,
+  getItemsInWishList, 
+  removeItemsFromWishList
 };

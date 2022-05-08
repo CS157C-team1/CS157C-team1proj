@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const ItemDisplay = ({ itemInfo, cartItems, refreshCart }) => {
+const ItemDisplay = ({ itemInfo, cartItems, wishItems, refreshCart, refreshWishList }) => {
   const addItemToCart = async (e) => {
     const instance = axios.create({ withCredentials: true });
     await instance
@@ -31,6 +31,34 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshCart }) => {
     refreshCart();
   };
 
+  const addItemToWishList = async (e) => {
+    const instance = axios.create({ withCredentials: true });
+    await instance
+      .post(
+        `${process.env.REACT_APP_BASE_BACKEND}/api/user/addWish/` +
+          itemInfo._id,
+        { itemId: itemInfo._id }
+      )
+      .catch((error) => {
+        console.log(error.message);
+      });
+    refreshWishList();
+  };
+
+  const removeItemsFromWishList = async (e) => {
+    const instance = axios.create({ withCredentials: true });
+    await instance
+      .delete(
+        `${process.env.REACT_APP_BASE_BACKEND}/api/user/deleteWish/` +
+          itemInfo._id,
+        { itemId: itemInfo._id }
+      )
+      .catch((error) => {
+        console.log(error.message);
+      });
+    refreshWishList();
+  };
+
   return (
     <div className="item-display">
       {/* {console.log("IMAGE: " + itemInfo.image)} */}
@@ -50,7 +78,7 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshCart }) => {
       <h3>Type: {itemInfo.type}</h3>
       <h3>Condition: {itemInfo.condition}</h3>
       <div className="item-btn-div">
-        {/* Check if Items is in Cart, if it is do not allow user to reclick button */}
+        {/* Check if Items is in Cart, if it is change button type */}
 
         {cartItems == null ? (
           <button className="btn" onClick={addItemToCart}>
@@ -66,7 +94,19 @@ const ItemDisplay = ({ itemInfo, cartItems, refreshCart }) => {
           </button>
         )}
 
-        <button className="btn-wishlist">Add to Wish List</button>
+        {wishItems == null ? (
+          <button className="btn-wishlist" onClick={addItemToWishList}>
+            Add to WishList
+          </button>
+        ) : wishItems.includes(itemInfo._id) ? (
+          <button className="btn-wishlist btn-remove" onClick={removeItemsFromWishList}>
+            Remove Item From WishList
+          </button>
+        ) : (
+          <button className="btn-wishlist" onClick={addItemToWishList}>
+            Add to WishList
+          </button>
+        )}
       </div>
     </div>
   );
@@ -79,6 +119,7 @@ ItemDisplay.defaultProps = {
     type: "Electronics",
     price: "750",
     cartItems: [],
+    wishItems: [],
   },
 };
 

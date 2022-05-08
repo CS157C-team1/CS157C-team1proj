@@ -54,7 +54,7 @@ router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
       User.removeItemFromCart(req.user._id.toString(), itemId)
       res.json({
         status: "Ok",
-        message: "Item successfully deleted"
+        message: "Item successfully deleted from Cart"
       })
     } else {
       htmlCode = 400;
@@ -67,4 +67,67 @@ router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
     res.status(htmlCode).json(htmlError(error.message, htmlCode));
   }
 });
+
+router.post("/addWish/:itemId", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const itemId = req.body.itemId;
+    if (itemId) {
+      User.addItemToWishList(req.user._id.toString(), itemId);
+      res.json({
+        status: "Ok",
+        message: "Item added to Wish List",
+      });
+    } else {
+      htmlCode = 400;
+      throw new Error("Missing Item ID");
+    }
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const data = await User.getItemsInWishList(req.user._id.toString());
+    console.log(data);
+    res.json({
+      wishListItems: data[0].wishlist,
+      status: "Ok",
+      message: "All Items retrieved from Wish List",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+router.delete("/deleteWish/:itemId", checkUserLoggedIn, (req, res) => {
+  let htmlCode = null;
+  try {
+    const itemId = req.params.itemId;
+    if(itemId) {
+      User.removeItemsFromWishList(req.user._id.toString(), itemId)
+      res.json({
+        status: "Ok",
+        message: "Item successfully deleted from Wish List"
+      })
+    } else {
+      htmlCode = 400;
+      throw new Error("Missing Item ID");
+    }
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
 module.exports = router;
