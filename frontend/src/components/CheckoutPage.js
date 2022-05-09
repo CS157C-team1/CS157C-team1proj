@@ -39,6 +39,11 @@ const CheckoutPage = ({}) => {
     } catch (error) {}
   };
 
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
   useEffect(() => {
     getItemsInCart();
   }, []);
@@ -65,7 +70,7 @@ const CheckoutPage = ({}) => {
                 <h2>Items ({cartItems.length}):</h2>
               </div>
               <div className="div-number">
-                <h2>${totalPrice}</h2>
+                <h2>{currencyFormatter.format(totalPrice)}</h2>
               </div>
             </div>
             <div>
@@ -73,7 +78,7 @@ const CheckoutPage = ({}) => {
                 <h2>Estimated Taxes (15%):</h2>
               </div>
               <div className="div-number">
-                <h2>${totalPrice * 0.15}</h2>
+                <h2>{currencyFormatter.format(totalPrice * 0.15)}</h2>
               </div>
             </div>
             <div>
@@ -81,7 +86,9 @@ const CheckoutPage = ({}) => {
                 <h1>Total:</h1>
               </div>
               <div className="div-number">
-                <h1>${totalPrice + totalPrice * 0.15}</h1>
+                <h1>
+                  {currencyFormatter.format(totalPrice + totalPrice * 0.15)}
+                </h1>
               </div>
             </div>
             <button className="btn">Checkout</button>
