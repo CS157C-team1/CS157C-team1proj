@@ -34,7 +34,6 @@ const CheckoutPage = ({}) => {
         .then((res) => {
           setCartItems(res.data.cartItemData);
           setTotalPrice(res.data.totalPrice);
-          console.log(cartItems);
         });
     } catch (error) {}
   };

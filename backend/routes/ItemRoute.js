@@ -15,7 +15,6 @@ router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
   // TODO: GET ONLY ITEMS that are for sale.
   try {
     const data = await itemModel.getAllItems();
-    // console.log(data)
     res.json({
       itemArray: data,
     });
@@ -64,7 +63,6 @@ router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   let data = null;
   try {
     const listOfItemObjIds = req.query.listOfitemObjIds;
-    console.log(req.query);
     // Item Obj Id has not been set
     if (listOfItemObjIds === "false") {
       data = await itemModel.getAllItems();
