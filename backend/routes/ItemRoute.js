@@ -32,8 +32,10 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const listOfItemObjIds = req.query.listOfItemObjIds;
-    if (listOfItemObjIds != null) {
-      const cartItemInformation = await itemModel.getItemsByObjId(listOfItemObjIds);
+    if (listOfItemObjIds == null) {
+      const cartItemInformation = await itemModel.getItemsByObjId(
+        listOfItemObjIds
+      );
       const totalPrice = await itemModel.getTotalPriceOfItems(data);
       res.json({
         cartItemData: cartItemInformation,
@@ -53,30 +55,29 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   }
 });
 
-// Get All Item information Not in the given array of OBJ IDS from request
-router.get("/getItemsNotPosted", checkUserLoggedIn, async (req, res) => {
+// Get All Item Information for Display to User (Not Posted By User, Not Sold Yet)
+// TODO: ADD FILTER FOR SOLD ITEMS
+router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
+  let data = null;
   try {
     const listOfItemObjIds = req.query.listOfitemObjIds;
-    console.log(listOfItemObjIds);
-    if (listOfItemObjIds != null) {
-      const data = await itemModel.getItemsNotIn(listOfItemObjIds);
-      res.json({
-        itemData: data,
-        status: "Ok",
-        message: "Able to retrieve Item Information",
-      });
+    console.log(req.query);
+    // Item Obj Id has not been set
+    if (listOfItemObjIds === "false") {
+      data = await itemModel.getAllItems();
+    } else if (listOfItemObjIds != null) {
+      data = await itemModel.getItemsNotIn(listOfItemObjIds);
     } else {
-      // TODO: GET RID OF
-      const data = await itemModel.getAllItems();
-      res.json({
-        itemData: data,
-        status: "Ok",
-        message: "Able to retrieve Item Information",
-      });
-      // htmlCode = 400;
-      // throw new Error("Missing Item Obj ids");
+      htmlCode = 400;
+      throw new Error("Missing Item Obj ids");
     }
+
+    res.json({
+      itemData: data,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
   } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
