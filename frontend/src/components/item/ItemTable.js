@@ -10,10 +10,11 @@ const ItemTable = () => {
 
   // Convert Obj Ids to actual Item information
   const getItems = async (itemsPosted) => {
+    console.log("Items Posted" + itemsPosted);
     try {
       const instance = axios.create({ withCredentials: true });
       await instance
-        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsNotIn`, {
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsNotPosted`, {
           params: { listOfitemObjIds: itemsPosted },
         })
         .then((res) => {
@@ -32,6 +33,7 @@ const ItemTable = () => {
         withCredentials: true,
       })
       .then((res) => {
+        console.log(res);
         getItems(res.data.itemsPosted);
       })
       .catch((error) => console.log(error.message));

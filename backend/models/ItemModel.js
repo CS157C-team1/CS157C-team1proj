@@ -20,6 +20,7 @@ const getItemsByObjId = async (listOfItemObjIds) => {
 // Get All Item Information Not int the Given list of item obj ids
 const getItemsNotIn = async (listOfItemObjIds) => {
   const finalList = listOfItemObjIds.map((x) => ObjectId(x));
+  console.log("Final List: " + finalList);
   const cursor = itemCollection.find({ _id: { $nin: finalList } });
   return await cursor.toArray().catch((error) => {
     throw new Error(error.message);

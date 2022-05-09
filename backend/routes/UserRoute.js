@@ -47,6 +47,22 @@ router.get("/getCart", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+router.get("/getUserLoggedOn", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    res.json({
+      userInfo: req.user,
+      status: "Ok",
+      message: "User Information Successfully Retrieved"
+    })
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
 // Retrieve Only the Obj ids Of All items in the wishlist
 router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
   let htmlCode = null;
@@ -135,11 +151,20 @@ router.get("/getItemsPosted", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const data = await User.getItemsFromPosted(req.user._id.toString());
-    res.json({
-      itemsPosted: data[0].items_post,
-      status: "Ok",
-      message: "All Items Posted by User Retrieved",
-    });
+    // Check If data is only has an array of empty json object
+    if (Object.keys(data[0]).length === 0) {
+      res.json({
+        itemsPosted: [],
+        status: "Ok",
+        message: "All Items Posted by User Retrieved",
+      });
+    } else {
+      res.json({
+        itemsPosted: data[0].items_post,
+        status: "Ok",
+        message: "All Items Posted by User Retrieved",
+      });
+    }
   } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
