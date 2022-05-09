@@ -32,11 +32,13 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const listOfItemObjIds = req.query.listOfItemObjIds;
-    if (listOfItemObjIds == null) {
+    if (listOfItemObjIds != null) {
       const cartItemInformation = await itemModel.getItemsByObjId(
         listOfItemObjIds
       );
-      const totalPrice = await itemModel.getTotalPriceOfItems(data);
+      const totalPrice = await itemModel.getTotalPriceOfItems(
+        cartItemInformation
+      );
       res.json({
         cartItemData: cartItemInformation,
         totalPrice: totalPrice,
