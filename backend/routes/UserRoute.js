@@ -29,6 +29,7 @@ router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+// Retrieve Only the Obj ids of All items in the cart
 router.get("/getCart", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
@@ -46,16 +47,17 @@ router.get("/getCart", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+// Retrieve Only the Obj ids Of All items in the wishlist
 router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
   let htmlCode = null;
   try {
     const itemId = req.params.itemId;
-    if(itemId) {
-      User.removeItemFromCart(req.user._id.toString(), itemId)
+    if (itemId) {
+      User.removeItemFromCart(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
-        message: "Item successfully deleted from Cart"
-      })
+        message: "Item successfully deleted from Cart",
+      });
     } else {
       htmlCode = 400;
       throw new Error("Missing Item ID");
@@ -94,7 +96,6 @@ router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const data = await User.getItemsInWishList(req.user._id.toString());
-    console.log(data);
     res.json({
       wishListItems: data[0].wishlist,
       status: "Ok",
@@ -112,16 +113,33 @@ router.delete("/deleteWish/:itemId", checkUserLoggedIn, (req, res) => {
   let htmlCode = null;
   try {
     const itemId = req.params.itemId;
-    if(itemId) {
-      User.removeItemsFromWishList(req.user._id.toString(), itemId)
+    if (itemId) {
+      User.removeItemsFromWishList(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
-        message: "Item successfully deleted from Wish List"
-      })
+        message: "Item successfully deleted from Wish List",
+      });
     } else {
       htmlCode = 400;
       throw new Error("Missing Item ID");
     }
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+router.get("/getItemsPosted", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const data = await User.getItemsFromPosted(req.user._id.toString());
+    res.json({
+      itemsPosted: data[0].items_post,
+      status: "Ok",
+      message: "All Items Posted by User Retrieved",
+    });
   } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;

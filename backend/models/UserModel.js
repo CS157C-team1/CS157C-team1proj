@@ -66,12 +66,22 @@ const getItemsInWishList = async (userObjId) => {
   return await cursor.toArray().catch((error) => {
     throw new Error(error.message);
   });
-}; 
+};
 
 const removeItemsFromWishList = async (userObjId, itemObjID) => {
   const filter = { _id: ObjectId(userObjId) };
   const updateDoc = { $pull: { wishlist: ObjectId(itemObjID) } };
   userCollection.updateOne(filter, updateDoc).catch((error) => {
+    throw new Error(error.message);
+  });
+};
+
+const getItemsFromPosted = async (userObjId) => {
+  const cursor = userCollection.find({ _id: ObjectId(userObjId) }).project({
+    items_post: 1,
+    _id: 0,
+  });
+  return await cursor.toArray().catch((error) => {
     throw new Error(error.message);
   });
 };
@@ -84,6 +94,7 @@ module.exports = {
   getItemsInCart,
   removeItemFromCart,
   addItemToWishList,
-  getItemsInWishList, 
-  removeItemsFromWishList
+  getItemsInWishList,
+  removeItemsFromWishList,
+  getItemsFromPosted,
 };

@@ -17,6 +17,15 @@ const getItemsByObjId = async (listOfItemObjIds) => {
   });
 };
 
+// Get All Item Information Not int the Given list of item obj ids
+const getItemsNotIn = async (listOfItemObjIds) => {
+  const finalList = listOfItemObjIds.map((x) => ObjectId(x));
+  const cursor = itemCollection.find({ _id: { $nin: finalList } });
+  return await cursor.toArray().catch((error) => {
+    throw new Error(error.message);
+  });
+};
+
 // TODO: Could be possible to be done with aggregation. Not sure which method is
 // better
 const getTotalPriceOfItems = async (listOfItemJsonObjs) => {
@@ -26,4 +35,9 @@ const getTotalPriceOfItems = async (listOfItemJsonObjs) => {
   });
   return await totalPrice;
 };
-module.exports = { getAllItems, getItemsByObjId, getTotalPriceOfItems };
+module.exports = {
+  getAllItems,
+  getItemsByObjId,
+  getTotalPriceOfItems,
+  getItemsNotIn,
+};

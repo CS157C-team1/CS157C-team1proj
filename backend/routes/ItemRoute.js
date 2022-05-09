@@ -52,4 +52,28 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+// Get All Item information Not in the given array of OBJ IDS from request
+router.get("/getItemsNotIn", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const listOfItemObjIds = req.query.listOfitemObjIds;
+    if (listOfItemObjIds != null) {
+      const data = await itemModel.getItemsNotIn(listOfItemObjIds);
+      res.json({
+        itemData: data,
+        status: "Ok",
+        message: "Able to retrieve Item Information",
+      });
+    } else {
+      htmlCode = 400;
+      throw new Error("Missing Item Obj ids");
+    }
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
 module.exports = router;

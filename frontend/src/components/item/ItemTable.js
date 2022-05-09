@@ -4,24 +4,40 @@ import axios from "axios";
 import ItemDisplay from "./ItemDisplay";
 
 const ItemTable = () => {
-  const [listOfItems, setListOfItems] = useState([]);
+  const [listOfItems, setListOfItems] = useState([]); //Items displayed to the User
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
 
-  const getItems = async () => {
+  // Convert Obj Ids to actual Item information
+  const getItems = async (itemsPosted) => {
     try {
-      await axios
-        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getAllItems`, {
-          withCredentials: true,
+      const instance = axios.create({ withCredentials: true });
+      await instance
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsNotIn`, {
+          params: { listOfitemObjIds: itemsPosted },
         })
         .then((res) => {
-          setListOfItems(res.data.itemArray);
+          setListOfItems(res.data.itemData);
         });
     } catch (error) {
       console.log(error.message);
     }
   };
 
+  // Only Get Obj Ids of Items Posted By User
+  const getItemsPosted = async () => {
+    const instance = axios.create({ withCredentials: true });
+    await instance
+      .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getItemsPosted`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        getItems(res.data.itemsPosted);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  // Only Get Obj Ids of Items Posted By User
   const getItemsInCart = async () => {
     try {
       await axios
@@ -36,6 +52,7 @@ const ItemTable = () => {
     }
   };
 
+  // Only Get Obj Ids of Items Posted By User
   const getItemsInWishList = async () => {
     try {
       await axios
@@ -48,10 +65,10 @@ const ItemTable = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getItems();
+    getItemsPosted();
     getItemsInCart();
     getItemsInWishList();
   }, []);
