@@ -14,10 +14,8 @@ const ProductPage = (itemInfo) => {
                 withCredentials: true,
                 })
                 .then((res) => {
-                    // console.log(res.data.itemArray);
                     setList(res.data.itemArray);
                 });
-            // console.log(list);
         } catch (error) {
             console.log(error.message);
         }
@@ -25,7 +23,7 @@ const ProductPage = (itemInfo) => {
 
     useEffect(() => {
         getItem(id);
-      });
+      }, []);
     
     return(
         <div className="item-display" id="productcard">
