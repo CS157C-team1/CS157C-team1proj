@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const ItemDisplay = ({
   itemInfo,
@@ -21,6 +22,12 @@ const ItemDisplay = ({
         console.log(error.message);
       });
     refreshCart();
+  };
+
+  let navigate = useNavigate();
+  const ShowProduct = () => {
+    let path = '/Product/' + itemInfo._id;
+    navigate(path);
   };
 
   const removeItemFromCart = async (e) => {
@@ -79,7 +86,7 @@ const ItemDisplay = ({
       ) : (
         <image></image>
       )}
-      <h2>{itemInfo.name}</h2>
+      <h2 className="item-display-name" onClick={ShowProduct}>{itemInfo.name}</h2>
       <h2>${itemInfo.price}</h2>
       <h3>Type: {itemInfo.type}</h3>
       <h3>Condition: {itemInfo.condition}</h3>
