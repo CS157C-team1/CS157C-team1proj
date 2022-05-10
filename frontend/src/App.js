@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes} from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
@@ -65,7 +65,8 @@ function App() {
           }
         ></Route>
         <Route
-          path="userPage"
+          exact
+          path="userPage/:userId"
           element={
             <>
               <Header
@@ -73,7 +74,7 @@ function App() {
                 updateUser={checkUserLoggedIn}
                 userInfo={userInfo}
               />
-              <UserPage />
+              <UserPage userLoggedOn={userInfo} />
             </>
           }
         ></Route>

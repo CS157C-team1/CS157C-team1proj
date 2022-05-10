@@ -40,7 +40,7 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
               <Link to="/">
                 <GoogleLogoutComponent updateUser={updateUser} />
               </Link>
-              <Link to="/userpage">
+              <Link to={"/userpage/" + userInfo._id}>
                 <img
                   src={userInfo.profile_pic_url}
                   alt="User"

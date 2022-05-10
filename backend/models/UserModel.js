@@ -26,6 +26,14 @@ const getUserByEmailCol = async (email) => {
   });
 };
 
+const getUserByObjectId = async (userId) => {
+  return await userCollection
+    .findOne({ _id: ObjectId(userId) })
+    .catch((error) => {
+      throw new Error(error.message);
+    });
+};
+
 const addItemToCart = async (userObjId, itemObjID) => {
   const filter = { _id: ObjectId(userObjId) };
   const updateDocument = { $addToSet: { itemCart: ObjectId(itemObjID) } };
@@ -46,7 +54,7 @@ const getItemsInCart = async (userObjId) => {
 const removeItemFromCart = async (userObjId, itemObjID) => {
   const filter = { _id: ObjectId(userObjId) };
   const updateDoc = { $pull: { itemCart: ObjectId(itemObjID) } };
-  userCollection.updateOne(filter, updateDoc).catch((error) => {
+  await userCollection.updateOne(filter, updateDoc).catch((error) => {
     throw new Error(error.message);
   });
 };
@@ -97,4 +105,5 @@ module.exports = {
   getItemsInWishList,
   removeItemsFromWishList,
   getItemsFromPosted,
+  getUserByObjectId
 };

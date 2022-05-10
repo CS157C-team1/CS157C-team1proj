@@ -6,6 +6,28 @@ const { checkUserLoggedIn } = require("./AuthUser");
 
 // Link: /api/user/...
 
+router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const userData = await User.getUserByObjectId(req.query.userId);
+    console.log(userData);
+    if (userData) {
+      res.json({
+        userInfo: userData,
+        status: "Ok",
+        message: "User Info Retrieved",
+      });
+    } else {
+      htmlCode = 400;
+      throw new Error("Could not find User");
+    }
+  } catch {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
 // Add item to Cart of the User using the ObjectID
 router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
@@ -53,8 +75,8 @@ router.get("/getUserLoggedOn", checkUserLoggedIn, async (req, res) => {
     res.json({
       userInfo: req.user,
       status: "Ok",
-      message: "User Information Successfully Retrieved"
-    })
+      message: "User Information Successfully Retrieved",
+    });
   } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;

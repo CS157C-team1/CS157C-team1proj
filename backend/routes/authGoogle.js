@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
         res.cookie(
           "SESSION_TOKEN",
           createJWT(
-            userDB.ObjectID,
+            userDB._id,
             userDB.email,
             userDB.first_name,
             userDB.last_name,
