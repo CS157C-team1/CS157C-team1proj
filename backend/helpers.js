@@ -15,8 +15,8 @@ const htmlError = (message, statusCode) =>  {
     }
 }
 
-const createJWT = (objectID, email, firstName, lastName) => {
-    return JWT.sign({objectID, email, firstName, lastName}, process.env.JWT_CODE, {expiresIn: '30d'});
+const createJWT = (_id, email, firstName, lastName, profile_pic_url) => {
+    return JWT.sign({_id, email, firstName, lastName, profile_pic_url}, process.env.JWT_CODE, {expiresIn: '30d'});
 }
 
 const getJWT = (token) => {

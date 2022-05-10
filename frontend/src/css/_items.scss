@@ -7,6 +7,10 @@
     width: fit-content;
     margin: 10px;
     padding: 10px;
+    h1 {
+        font-size: 24px;
+        color: red;
+    }
     h2 {
         font-size: 18px;
     }
@@ -59,5 +63,14 @@
     font-size: 14px;
     &:hover {
         background-color: $darkPink;
+    }
+}
+
+.btn-remove {
+    @include btn-general();
+    background-color: lightgray;
+    font-size: 14px;
+    &:hover{
+        background-color: darkgray;
     }
 }

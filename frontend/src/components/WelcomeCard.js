@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GoogleLoginComponent from './GoogleLoginComponent';
+import GoogleLoginComponent from './google/GoogleLoginComponent';
 
 const WelcomeCard = ({updateUser}) => {
     return (

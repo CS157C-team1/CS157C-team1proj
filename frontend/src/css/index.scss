@@ -1,5 +1,6 @@
 @import "./variables";
 @import "./items";
+@import "./checkout";
 @import "./mixins";
 
 * {
@@ -92,7 +93,59 @@ body {
     margin: 20px;
     font-size: 24px;
   }
+
+  img {
+    height: 30px;
+  };
+
+  .img-round {
+    border-radius: 50%;
+  }
+
+  .profile-pic {
+    height: 50px;
+  }
+  
+  .cart {
+    background-color: $shockingYellow;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $chartreuse;
+    }
+    // border: 3px;
+  }
+
+  .wish {
+    background-color: $hotPink;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    margin-right: 10px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $darkPink
+    }
+    // border: 3px;
+  }
 }
+
+// .div-btn-disabled {
+//   @include btn-general;
+//   font-size: 14px;
+//   padding-left: 12px;
+//   padding-right: 12px;
+//   padding-top: 6px;
+//   padding-bottom: 6px;
+//   background-color: lightgray;
+//   cursor: not-allowed;
+// }
 
 // label {
 //     display: flex;
