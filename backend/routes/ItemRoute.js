@@ -31,7 +31,6 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const listOfItemObjIds = req.query.listOfItemObjIds;
-    console.log(listOfItemObjIds === "false");
 
     let cartItemInformation = null;
     let totalPrice = 0;
