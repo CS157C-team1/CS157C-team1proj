@@ -31,23 +31,31 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const listOfItemObjIds = req.query.listOfItemObjIds;
-    if (listOfItemObjIds != null) {
-      const cartItemInformation = await itemModel.getItemsByObjId(
+    console.log(listOfItemObjIds === "false");
+
+    let cartItemInformation = null;
+    let totalPrice = 0;
+    // Set to false if obj list is empty in the front end
+    if (listOfItemObjIds === "false") {
+      cartItemData = [];
+    } else if (listOfItemObjIds != null) {
+      cartItemInformation = await itemModel.getItemsByObjId(
         listOfItemObjIds
       );
-      const totalPrice = await itemModel.getTotalPriceOfItems(
+      totalPrice = await itemModel.getTotalPriceOfItems(
         cartItemInformation
       );
-      res.json({
-        cartItemData: cartItemInformation,
-        totalPrice: totalPrice,
-        status: "Ok",
-        message: "Able to retrieve Item Information",
-      });
     } else {
       htmlCode = 400;
       throw new Error("Missing Item Obj ids");
     }
+
+    res.json({
+      cartItemData: cartItemInformation,
+      totalPrice: totalPrice,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
   } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
@@ -57,7 +65,6 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
 });
 
 // Get All Item Information for Display to User (Not Posted By User, Not Sold Yet)
-// TODO: ADD FILTER FOR SOLD ITEMS
 router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   let data = null;

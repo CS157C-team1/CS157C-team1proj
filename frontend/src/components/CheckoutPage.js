@@ -16,6 +16,7 @@ const CheckoutPage = ({}) => {
         })
         .then((res) => {
           // Get Actual Item Collection information
+          console.log(res.data.cartItems);
           getItemInfo(res.data.cartItems);
         });
     } catch (error) {
@@ -25,6 +26,10 @@ const CheckoutPage = ({}) => {
 
   // Gets actual item information from item collection from obj ids
   const getItemInfo = async (listOfObjIds) => {
+    // If there are no items in cart, set the array to false
+    if(listOfObjIds.length == 0) {
+      listOfObjIds = false
+    }
     try {
       const instance = axios.create({ withCredentials: true });
       await instance
@@ -59,7 +64,12 @@ const CheckoutPage = ({}) => {
           <div className="checkout-page-div-left">
             <h1>Checkout Page: </h1>
             {Object.keys(cartItems).map((index) => {
-              return <CheckoutRow itemInfo={cartItems[index]}></CheckoutRow>;
+              return (
+                <CheckoutRow
+                  itemInfo={cartItems[index]}
+                  refreshCart={getItemsInCart}
+                ></CheckoutRow>
+              );
             })}
           </div>
           <div className="checkout-page-div-right">

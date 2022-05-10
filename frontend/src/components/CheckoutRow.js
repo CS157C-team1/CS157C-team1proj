@@ -1,8 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import deleteIcon from "../images/deleteX.png";
 
-const CheckoutRow = ({ itemInfo }) => {
+const CheckoutRow = ({ itemInfo, refreshCart }) => {
+  const removeItemFromCart = async (e) => {
+    const instance = axios.create({ withCredentials: true });
+    await instance
+      .delete(
+        `${process.env.REACT_APP_BASE_BACKEND}/api/user/deleteCart/` +
+          itemInfo._id,
+        { itemId: itemInfo._id }
+      )
+      .catch((error) => {
+        console.log(error.message);
+      });
+    refreshCart();
+  };
+
   return (
     <div className="checkout-row">
       {itemInfo.image == null ? (
@@ -21,7 +36,7 @@ const CheckoutRow = ({ itemInfo }) => {
         <h2>${itemInfo.price}</h2>
       </div>
       <div className="div-top-right">
-        <img src={deleteIcon} alt="x"></img>
+        <img src={deleteIcon} alt="x" onClick={removeItemFromCart}></img>
       </div>
     </div>
   );

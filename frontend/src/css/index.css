@@ -223,6 +223,7 @@
   height: 25px;
   margin: 10px;
   width: auto;
+  cursor: pointer;
 }
 
 .checkout-page-div-left {
