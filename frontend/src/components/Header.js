@@ -9,7 +9,7 @@ const Header = ({ isUserLoggedOn, updateUser }) => {
 
   const onClickAddItem = () => {
     setShowModal(true);
-    <AddItemModal showModal={showModal} setShowModal={setShowModal} />;
+    // <AddItemModal showModal={showModal} setShowModal={setShowModal} />;
   };
 
   return (
@@ -18,16 +18,18 @@ const Header = ({ isUserLoggedOn, updateUser }) => {
         <div className="navBar">
           <h1>Starflow</h1>
           {isUserLoggedOn && (
-            <button className="btn headerBGColor" onClick={onClickAddItem}>
+            <button className="btn" onClick={onClickAddItem}>
               SELL
             </button>
           )}
         </div>
-        {isUserLoggedOn ? (
-          <GoogleLogoutComponent updateUser={updateUser} />
-        ) : (
-          <GoogleLoginComponent updateUser={updateUser} classStyle="btn-header" buttonText="Login" />
-        )}
+        <div className="navBar">
+          {isUserLoggedOn ? (
+            <GoogleLogoutComponent updateUser={updateUser} />
+          ) : (
+            <GoogleLoginComponent updateUser={updateUser} buttonText="Login" />
+          )}
+        </div>
       </div>
       <AddItemModal showModal={showModal} setShowModal={setShowModal} />
     </>

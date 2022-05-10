@@ -1,8 +1,9 @@
 const mongoConnection = require("../mongoConnection");
+const {ObjectId} = require('mongodb');
 const userCollection = mongoConnection.collection("users");
 
 const getAllUsersCol = async () => {
-  const cursor = userCollection.find();
+  const cursor = userCollection.find()
   await cursor
     .toArray()
     .then((data) => {
@@ -25,4 +26,12 @@ const getUserByEmailCol = async (email) => {
   });
 };
 
-module.exports = { getAllUsersCol, insertUserCol, getUserByEmailCol };
+const addItemToCart = async (userObjId, itemObjID) => {
+  const filter = {_id: ObjectId(userObjId)}
+  const updateDocument = {$addToSet: {itemCart: [ObjectId(itemObjID)]}}
+  await userCollection.updateOne(filter, updateDocument).catch((error) => {
+    throw new Error(error.message)
+  })
+}
+
+module.exports = { getAllUsersCol, insertUserCol, getUserByEmailCol, addItemToCart };
