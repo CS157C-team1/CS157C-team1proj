@@ -6,6 +6,7 @@ import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
 import CheckoutPage from "./components/CheckoutPage";
+import ProductPage from "./components/ProductPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
@@ -105,6 +106,15 @@ function App() {
                 userInfo={userInfo}
               />
               <h1>Wish List</h1>
+            </>
+          }
+        ></Route>
+        <Route
+          path="Product/:id"
+          element={
+            <>
+              <Header isUserLoggedOn={isUserLoggedOn} updateUser={checkUserLoggedIn} />
+              <ProductPage />
             </>
           }
         ></Route>
