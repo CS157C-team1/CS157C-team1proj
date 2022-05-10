@@ -2,7 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-const ItemDisplay = ({ itemInfo, cartItems, wishItems, refreshCart, refreshWishList }) => {
+const ItemDisplay = ({
+  itemInfo,
+  cartItems,
+  wishItems,
+  refreshCart,
+  refreshWishList,
+}) => {
   const addItemToCart = async (e) => {
     const instance = axios.create({ withCredentials: true });
     await instance
@@ -78,34 +84,44 @@ const ItemDisplay = ({ itemInfo, cartItems, wishItems, refreshCart, refreshWishL
       <h3>Type: {itemInfo.type}</h3>
       <h3>Condition: {itemInfo.condition}</h3>
       <div className="item-btn-div">
-        {/* Check if Items is in Cart, if it is change button type */}
-
-        {cartItems == null ? (
-          <button className="btn" onClick={addItemToCart}>
-            Add to Cart
-          </button>
-        ) : cartItems.includes(itemInfo._id) ? (
-          <button className="btn-remove" onClick={removeItemFromCart}>
-            Remove Item From Cart
-          </button>
+        {/* If item is already sold, do not display buttons */}
+        {itemInfo.sold == true ? (
+          <h1>Item Already Sold</h1>
         ) : (
-          <button className="btn" onClick={addItemToCart}>
-            Add to Cart
-          </button>
-        )}
+          /* Check if Items is in Cart, if it is change button type */
+          <>
+            {cartItems == null ? (
+              <button className="btn" onClick={addItemToCart}>
+                Add to Cart
+              </button>
+            ) : cartItems.includes(itemInfo._id) ? (
+              <button className="btn-remove" onClick={removeItemFromCart}>
+                Remove Item From Cart
+              </button>
+            ) : (
+              <button className="btn" onClick={addItemToCart}>
+                Add to Cart
+              </button>
+            )}
 
-        {wishItems == null ? (
-          <button className="btn-wishlist" onClick={addItemToWishList}>
-            Add to WishList
-          </button>
-        ) : wishItems.includes(itemInfo._id) ? (
-          <button className="btn-wishlist btn-remove" onClick={removeItemsFromWishList}>
-            Remove Item From WishList
-          </button>
-        ) : (
-          <button className="btn-wishlist" onClick={addItemToWishList}>
-            Add to WishList
-          </button>
+            {/* Check if Items is in Cart, if it is change button type */}
+            {wishItems == null ? (
+              <button className="btn-wishlist" onClick={addItemToWishList}>
+                Add to WishList
+              </button>
+            ) : wishItems.includes(itemInfo._id) ? (
+              <button
+                className="btn-wishlist btn-remove"
+                onClick={removeItemsFromWishList}
+              >
+                Remove Item From WishList
+              </button>
+            ) : (
+              <button className="btn-wishlist" onClick={addItemToWishList}>
+                Add to WishList
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
