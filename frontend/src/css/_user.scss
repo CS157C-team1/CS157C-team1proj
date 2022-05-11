@@ -45,11 +45,25 @@
   margin-left: 50px;
 
   .div-left {
-      float: left;
+    float: left;
+    margin-top: -40px;
   }
+
   .user-nav-bar {
+    margin-bottom: 100px;
+    .div-yellow {
+      background-color: $shockingYellow;
+      border: solid;
+      border-color: black;
+
+      h2 {
+        color: black;
+      }
+    }
+
     div {
       float: left;
+      padding: 5px;
       margin-right: 50px;
     }
   }

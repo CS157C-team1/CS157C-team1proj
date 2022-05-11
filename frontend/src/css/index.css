@@ -234,10 +234,26 @@
 
 .user-items-info .div-left {
   float: left;
+  margin-top: -40px;
+}
+
+.user-items-info .user-nav-bar {
+  margin-bottom: 100px;
+}
+
+.user-items-info .user-nav-bar .div-yellow {
+  background-color: #fee36e;
+  border: solid;
+  border-color: black;
+}
+
+.user-items-info .user-nav-bar .div-yellow h2 {
+  color: black;
 }
 
 .user-items-info .user-nav-bar div {
   float: left;
+  padding: 5px;
   margin-right: 50px;
 }
 

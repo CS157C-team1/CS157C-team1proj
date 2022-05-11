@@ -41,19 +41,19 @@ const UserItemWidget = ({ displayType }) => {
         <div className="user-items-info">
           <div className="user-nav-bar">
             <Link to={"/userpage/" + userId + "/wishlist"}>
-              <div>
+              <div className={displayType === "wishlist" && "div-yellow"}>
                 <h2>Wishlist</h2>
               </div>
             </Link>
 
             <Link to={"/userpage/" + userId + "/posted"}>
-              <div>
+              <div className={displayType === "posted" && "div-yellow"}>
                 <h2>Posted</h2>
               </div>
             </Link>
 
             <Link to={"/userpage/" + userId + "/bought"}>
-              <div>
+              <div className={displayType === "bought" && "div-yellow"}>
                 <h2>Bought</h2>
               </div>
             </Link>
