@@ -21,7 +21,7 @@ router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
       htmlCode = 400;
       throw new Error("Could not find User");
     }
-  } catch {
+  } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
     }
