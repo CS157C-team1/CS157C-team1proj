@@ -98,7 +98,7 @@ const ItemDisplay = ({
       return <h1>Item Sold</h1>;
       // Do not display buttons if item table is in posted or bought
     } else if (displayType != "posted" && displayType != "bought") {
-      // Display buttons depending on if they are already in cart and 
+      // Display buttons depending on if they are already in cart and
       // wishlist
       if (cartItems == null || !cartItems.includes(itemInfo._id)) {
         if (wishItems == null || !wishItems.includes(itemInfo._id)) {
@@ -165,13 +165,14 @@ const ItemDisplay = ({
 
   useEffect(() => {
     getSellerInfo();
-    console.log(displayType);
-  }, []);
+    console.log(itemInfo);
+    // Wait for itemInfo to update since it has to be
+    // queried from the backend
+  }, [itemInfo._id]);
 
   return (
     sellerInfo != null && (
       <div className="item-display">
-        {/* {console.log("IMAGE: " + itemInfo.image)} */}
         {itemInfo.image == null ? (
           <div className="item-img-size item-empty-image">
             <h1>

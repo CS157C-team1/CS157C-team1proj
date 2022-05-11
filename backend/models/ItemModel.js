@@ -18,6 +18,9 @@ const getItem = async (id) => {
 };
 
 const getItemsByObjId = async (listOfItemObjIds) => {
+  if (listOfItemObjIds === null || listOfItemObjIds === undefined) {
+    return await [];
+  }
   const finalList = listOfItemObjIds.map((x) => ObjectId(x));
   const cursor = itemCollection.find({ _id: { $in: finalList } });
   return await cursor.toArray().catch((error) => {

@@ -186,7 +186,9 @@ router.get("/getItemsPosted", checkUserLoggedIn, async (req, res) => {
       });
     } else {
       // Grab actual item info using list of item obj ids
-      const listOfItemInfo = await itemModel.getItemsByObjId(listOfItemObjIds[0].items_post);
+      const listOfItemInfo = await itemModel.getItemsByObjId(
+        listOfItemObjIds[0].items_post
+      );
       res.json({
         itemsPosted: listOfItemInfo,
         status: "Ok",

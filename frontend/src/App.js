@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import axios from "axios";
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
@@ -34,6 +34,7 @@ function App() {
 
   useEffect(() => {
     checkUserLoggedIn();
+    
   }, []);
 
   return (
@@ -51,7 +52,7 @@ function App() {
               {isUserLoggedOn ? (
                 <>
                   <div className="center-div">
-                    <ItemTable userInfo={userInfo} displayUserArray="display"/>
+                    <ItemTable userInfo={userInfo} displayUserArray="display" />
                     {/* <ItemDisplay /> */}
                   </div>
                 </>
@@ -75,10 +76,53 @@ function App() {
                 userInfo={userInfo}
               />
               <UserPage />
-              <UserItemWidget />
+              <UserItemWidget displayType="wishlist" />
             </>
           }
-        ></Route>
+        >
+        </Route>
+        <Route
+            path="userPage/:userId/posted"
+            element={
+              <>
+                <Header
+                  isUserLoggedOn={isUserLoggedOn}
+                  updateUser={checkUserLoggedIn}
+                  userInfo={userInfo}
+                />
+                <UserPage />
+                <UserItemWidget displayType="posted" />
+              </>
+            }
+          />
+           <Route
+            path="userPage/:userId/wishlist"
+            element={
+              <>
+                <Header
+                  isUserLoggedOn={isUserLoggedOn}
+                  updateUser={checkUserLoggedIn}
+                  userInfo={userInfo}
+                />
+                <UserPage />
+                <UserItemWidget displayType="wishlist" />
+              </>
+            }
+          />
+           <Route
+            path="userPage/:userId/bought"
+            element={
+              <>
+                <Header
+                  isUserLoggedOn={isUserLoggedOn}
+                  updateUser={checkUserLoggedIn}
+                  userInfo={userInfo}
+                />
+                <UserPage />
+                <UserItemWidget displayType="bought" />
+              </>
+            }
+          />
         <Route
           path="cart"
           element={
@@ -113,7 +157,10 @@ function App() {
           path="Product/:id"
           element={
             <>
-              <Header isUserLoggedOn={isUserLoggedOn} updateUser={checkUserLoggedIn} />
+              <Header
+                isUserLoggedOn={isUserLoggedOn}
+                updateUser={checkUserLoggedIn}
+              />
               <ProductPage />
             </>
           }

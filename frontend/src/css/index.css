@@ -232,6 +232,15 @@
   margin-left: 50px;
 }
 
+.user-items-info .div-left {
+  float: left;
+}
+
+.user-items-info .user-nav-bar div {
+  float: left;
+  margin-right: 50px;
+}
+
 .checkout-row {
   display: -webkit-box;
   display: -ms-flexbox;

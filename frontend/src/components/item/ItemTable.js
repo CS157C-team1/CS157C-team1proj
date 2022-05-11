@@ -37,8 +37,8 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
       .catch((error) => console.log(error.message));
   };
 
-  // Only Get Obj Ids of Items Posted By User
-  const getItemsInCart = async () => {
+  // Only Get Obj Ids of Items Posted By User Logged in
+  const getObjIdsInCart = async () => {
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getCart`, {
@@ -52,8 +52,8 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     }
   };
 
-  // Only Get Obj Ids of Items Posted By User
-  const getItemsInWishList = async () => {
+  // Only Get Obj Ids of wishlisted items of User logged in
+  const getObjIdsInWishList = async () => {
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getWishList`, {
@@ -67,31 +67,79 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     }
   };
 
+  const getItemInfoInWishList = async () => {
+    try {
+      const instance = axios.create({ withCredentials: true });
+      await instance
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getWishList`, {
+          params: { userId: userInfo._id },
+        })
+        .then((res) => {
+          setListOfItems(res.data.wishList);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const getBoughtItems = async () => {
+    try {
+      const instance = axios.create({ withCredentials: true });
+      await instance
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsBought`, {
+          params: { userId: userInfo._id },
+        })
+        .then((res) => {
+          setListOfItems(res.data.itemsBought);
+          console.log(listOfItems);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
+    // Display item for logged in user
     if (displayUserArray === "display") {
+      getObjIdsInCart();
+      getObjIdsInWishList();
       getItemsForDisplay();
-      getItemsInCart();
-      getItemsInWishList();
+      // Display items posted by user
     } else if (displayUserArray === "posted") {
       getItemsPosted();
+      // Display wishlist of user
+    } else if (displayUserArray === "wishlist") {
+      getObjIdsInCart();
+      getObjIdsInWishList();
+      getItemInfoInWishList();
+    } else if (displayUserArray === "bought") {
+      getBoughtItems();
     }
-  }, []);
+  }, [listOfItems]);
 
   return (
-    <div className="item-table">
-      {Object.keys(listOfItems).map((index) => {
-        return (
-          <ItemDisplay
-            itemInfo={listOfItems[index]}
-            cartItems={cartItems}
-            wishItems={wishItems}
-            refreshCart={getItemsInCart}
-            refreshWishList={getItemsInWishList}
-            displayType={displayUserArray}
-          />
-        );
-      })}
-    </div>
+    <>
+      {listOfItems == null || listOfItems.length == 0 ? (
+        <h1>No Items to display</h1>
+      ) : (
+        <>
+          <div className="item-table">
+            {Object.keys(listOfItems).map((index) => {
+              return (
+                <ItemDisplay
+                  itemInfo={listOfItems[index]}
+                  cartItems={cartItems}
+                  wishItems={wishItems}
+                  refreshCart={getObjIdsInCart}
+                  refreshWishList={getObjIdsInWishList}
+                  displayType={displayUserArray}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

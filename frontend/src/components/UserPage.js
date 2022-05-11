@@ -20,7 +20,6 @@ const UserPage = ({ }) => {
   };
 
   const combineAdress = () => {
-    console.log(userInfo.address);
     return (
       userInfo.address.house_number +
       " " +
@@ -38,7 +37,6 @@ const UserPage = ({ }) => {
 
   useEffect(() => {
     getUserInfo();
-    console.log(userInfo);
   }, [userId]);
 
   return (

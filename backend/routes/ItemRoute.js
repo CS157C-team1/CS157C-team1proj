@@ -94,4 +94,44 @@ router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+// Get All Item Information for a wishlist of a given user
+router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const userInfo = await userModel.getUserByObjectId(req.query.userId);
+    const wishlist = userInfo.wishlist;
+    const data = await itemModel.getItemsByObjId(wishlist);
+    res.json({
+      wishList: data,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+// Get All Item Information of bought items of a given user
+router.get("/getItemsBought", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const userInfo = await userModel.getUserByObjectId(req.query.userId);
+    const listOfBoughtItems = userInfo.items_bought;
+    const data = await itemModel.getItemsByObjId(listOfBoughtItems);
+    res.json({
+      itemsBought: data,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
 module.exports = router;
