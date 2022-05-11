@@ -66,7 +66,6 @@ function App() {
           }
         ></Route>
         <Route
-          exact
           path="userPage/:userId"
           element={
             <>
