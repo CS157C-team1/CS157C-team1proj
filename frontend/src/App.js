@@ -141,19 +141,6 @@ function App() {
           }
         ></Route>
         <Route
-          path="wishlist"
-          element={
-            <>
-              <Header
-                isUserLoggedOn={isUserLoggedOn}
-                updateUser={checkUserLoggedIn}
-                userInfo={userInfo}
-              />
-              <h1>Wish List</h1>
-            </>
-          }
-        ></Route>
-        <Route
           path="Product/:id"
           element={
             <>
