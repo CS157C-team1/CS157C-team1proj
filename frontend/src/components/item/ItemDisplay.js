@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ItemDisplay = ({
   itemInfo,
@@ -10,6 +10,8 @@ const ItemDisplay = ({
   refreshCart,
   refreshWishList,
 }) => {
+  const [sellerInfo, setSellerInfo] = useState(null);
+
   const addItemToCart = async (e) => {
     const instance = axios.create({ withCredentials: true });
     await instance
@@ -24,9 +26,14 @@ const ItemDisplay = ({
     refreshCart();
   };
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const ShowProduct = () => {
-    let path = '/Product/' + itemInfo._id;
+    let path = "/Product/" + itemInfo._id;
+    navigate(path);
+  };
+
+  const showUser = () => {
+    const path = "/userpage/" + sellerInfo._id;
     navigate(path);
   };
 
@@ -72,66 +79,102 @@ const ItemDisplay = ({
     refreshWishList();
   };
 
-  return (
-    <div className="item-display">
-      {/* {console.log("IMAGE: " + itemInfo.image)} */}
-      {itemInfo.image == null ? (
-        <div className="item-img-size item-empty-image">
-          <h1>
-            NO <br />
-            IMAGE
-            <br /> FOUND
-          </h1>
-        </div>
-      ) : (
-        <image></image>
-      )}
-      <h2 className="item-display-name" onClick={ShowProduct}>{itemInfo.name}</h2>
-      <h2>${itemInfo.price}</h2>
-      <h3>Type: {itemInfo.type}</h3>
-      <h3>Condition: {itemInfo.condition}</h3>
-      <div className="item-btn-div">
-        {/* If item is already sold, do not display buttons */}
-        {itemInfo.sold == true ? (
-          <h1>Item Already Sold</h1>
-        ) : (
-          /* Check if Items is in Cart, if it is change button type */
-          <>
-            {cartItems == null ? (
-              <button className="btn" onClick={addItemToCart}>
-                Add to Cart
-              </button>
-            ) : cartItems.includes(itemInfo._id) ? (
-              <button className="btn-remove" onClick={removeItemFromCart}>
-                Remove Item From Cart
-              </button>
-            ) : (
-              <button className="btn" onClick={addItemToCart}>
-                Add to Cart
-              </button>
-            )}
+  const getSellerInfo = async () => {
+    const instance = axios.create({ withCredentials: true });
+    instance
+      .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getUserById`, {
+        params: { userId: itemInfo.seller },
+      })
+      .then((res) => {
+        console.log(res);
+        setSellerInfo(res.data.userInfo);
+      })
+      .catch((error) => console.log(error.message));
+  };
 
-            {/* Check if Items is in Cart, if it is change button type */}
-            {wishItems == null ? (
-              <button className="btn-wishlist" onClick={addItemToWishList}>
-                Add to WishList
-              </button>
-            ) : wishItems.includes(itemInfo._id) ? (
-              <button
-                className="btn-wishlist btn-remove"
-                onClick={removeItemsFromWishList}
-              >
-                Remove Item From WishList
-              </button>
-            ) : (
-              <button className="btn-wishlist" onClick={addItemToWishList}>
-                Add to WishList
-              </button>
-            )}
-          </>
+  const currencyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+
+  useEffect(() => {
+    getSellerInfo();
+  }, []);
+
+  return (
+    sellerInfo != null && (
+      <div className="item-display">
+        {/* {console.log("IMAGE: " + itemInfo.image)} */}
+        {itemInfo.image == null ? (
+          <div className="item-img-size item-empty-image">
+            <h1>
+              NO <br />
+              IMAGE
+              <br /> FOUND
+            </h1>
+          </div>
+        ) : (
+          <image></image>
         )}
+        <h2 className="item-display-name" onClick={ShowProduct}>
+          {itemInfo.name}
+        </h2>
+        <div className="div-seller" onClick={showUser}>
+          <img
+            src={sellerInfo.profile_pic_url}
+            alt="Seller Img"
+            className="img-seller"
+          ></img>
+          <h2>
+            {sellerInfo.first_name} {sellerInfo.last_name}
+          </h2>
+        </div>
+        <h2>{currencyFormatter.format(itemInfo.price)}</h2>
+        <h3>Type: {itemInfo.type}</h3>
+        <h3>Condition: {itemInfo.condition}</h3>
+        <div className="item-btn-div">
+          {/* If item is already sold, do not display buttons */}
+          {itemInfo.sold === true ? (
+            <h1>Item Already Sold</h1>
+          ) : (
+            /* Check if Items is in Cart, if it is change button type */
+            <>
+              {cartItems == null ? (
+                <button className="btn" onClick={addItemToCart}>
+                  Add to Cart
+                </button>
+              ) : cartItems.includes(itemInfo._id) ? (
+                <button className="btn-remove" onClick={removeItemFromCart}>
+                  Remove Item From Cart
+                </button>
+              ) : (
+                <button className="btn" onClick={addItemToCart}>
+                  Add to Cart
+                </button>
+              )}
+
+              {/* Check if Items is in Cart, if it is change button type */}
+              {wishItems == null ? (
+                <button className="btn-wishlist" onClick={addItemToWishList}>
+                  Add to WishList
+                </button>
+              ) : wishItems.includes(itemInfo._id) ? (
+                <button
+                  className="btn-wishlist btn-remove"
+                  onClick={removeItemsFromWishList}
+                >
+                  Remove Item From WishList
+                </button>
+              ) : (
+                <button className="btn-wishlist" onClick={addItemToWishList}>
+                  Add to WishList
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

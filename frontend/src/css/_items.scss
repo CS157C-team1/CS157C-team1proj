@@ -7,6 +7,32 @@
     width: fit-content;
     margin: 10px;
     padding: 10px;
+
+    .item-display-name {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .div-seller {
+        margin-bottom: 10px;
+        cursor: pointer;
+        img {
+            width: 20px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 10px;
+        }
+
+        h2{
+            font-size: 18px;
+            margin: 0px;
+        }
+    }
+    .img-seller {
+        width: 20px;
+        border-radius: 50%;
+    }
+
     h1 {
         font-size: 24px;
         color: red;

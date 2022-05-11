@@ -13,6 +13,33 @@
   padding: 10px;
 }
 
+.item-display .item-display-name {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.item-display .div-seller {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.item-display .div-seller img {
+  width: 20px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.item-display .div-seller h2 {
+  font-size: 18px;
+  margin: 0px;
+}
+
+.item-display .img-seller {
+  width: 20px;
+  border-radius: 50%;
+}
+
 .item-display h1 {
   font-size: 24px;
   color: red;
@@ -390,25 +417,6 @@ body {
 .navBar button {
   margin: 20px;
   font-size: 24px;
-}
-
-.item-display-name{
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-#productcard{
-  align-items: center;
-  text-align: center;
-  display: inline;
-  border: none;
-  margin: none;
-  padding: none;
-}
-
-#productimg{
-  display:inline;
-  border:none;
 }
 
 .navBar img {

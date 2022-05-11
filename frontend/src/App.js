@@ -5,14 +5,14 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
-import CheckoutPage from "./components/CheckoutPage";
-import ProductPage from "./components/ProductPage";
+import CheckoutPage from "./components/item/CheckoutPage";
+import ProductPage from "./components/item/ProductPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
   const [isUserLoggedOn, setIsUserLoggedOn] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   // Check Cookies for SESSION TOKEN
   const checkUserLoggedIn = async () => {
@@ -20,7 +20,6 @@ function App() {
     await instance
       .get(`${process.env.REACT_APP_BASE_BACKEND}/auth/getCookie`)
       .then((res) => {
-        // console.log(res);
         if ("SESSION_TOKEN" in res.data.cookies) {
           setUserInfo(res.data.user);
           setIsUserLoggedOn(true);
@@ -28,7 +27,7 @@ function App() {
           setIsUserLoggedOn(false);
           setUserInfo(null);
         }
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
 

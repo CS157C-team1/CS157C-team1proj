@@ -30,7 +30,6 @@ router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
 router.get("/getItem/:_id", checkUserLoggedIn, async(req, res) => {
   try {
     const data = await itemModel.getItem(req.params._id);
-    // console.log(data);
     res.json({
       itemArray: data,
     });
