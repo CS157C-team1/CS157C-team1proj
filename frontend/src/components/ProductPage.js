@@ -23,8 +23,22 @@ const ProductPage = (itemInfo) => {
         }
     };
 
+    const [userInfo, setUserInfo] = useState([]);
+    const getUserInfo = async (id) => {
+        const instance = axios.create({ withCredentials: true });
+        instance
+            .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getUserById`, {
+            params: { userId: id },
+            })
+            .then((res) => {
+            setUserInfo(res.data.userInfo);
+            })
+            .catch((error) => console.log(error.message));
+    };
+
     useEffect(() => {
         getItem(id);
+        getUserInfo(list['seller']);
       });
     
     return(
@@ -39,6 +53,7 @@ const ProductPage = (itemInfo) => {
             {Object.keys(list).filter((index) => index !== "_id" && index !== "seller" && index !== "sold").map((index) => {
                 return <h3>{index[0].toUpperCase() + index.slice(1)}: {list[index]}</h3>;
              })}
+            <h3>Seller: {userInfo.first_name + " " + userInfo.last_name}</h3>
         </div>
     )   
 };
