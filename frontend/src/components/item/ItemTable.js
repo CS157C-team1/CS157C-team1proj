@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import ItemDisplay from "./ItemDisplay";
 
-const ItemTable = () => {
+const ItemTable = ({userInfo, items}) => {
   const [listOfItems, setListOfItems] = useState([]); //Items displayed to the User
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
@@ -36,7 +36,7 @@ const ItemTable = () => {
     const instance = axios.create({ withCredentials: true });
     await instance
       .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getItemsPosted`, {
-        withCredentials: true,
+        params: { userId: userInfo._id }
       })
       .then((res) => {
         getItemsForDisplay(res.data.itemsPosted);

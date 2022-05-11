@@ -3,19 +3,9 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 
-const UserPage = ({ userLoggedOn }) => {
+const UserPage = ({ }) => {
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState(null);
-
-  // const getUserLoggedOn = async () => {
-  //   const instance = axios.create({ withCredentials: true });
-  //   instance
-  //     .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getUserLoggedOn`)
-  //     .then((res) => {
-  //       setUserInfo(res.data.userInfo);
-  //     })
-  //     .catch((error) => console.log(error.message));
-  // };
 
   const getUserInfo = async () => {
     const instance = axios.create({ withCredentials: true });
@@ -47,12 +37,6 @@ const UserPage = ({ userLoggedOn }) => {
   };
 
   useEffect(() => {
-    // if (userLoggedOn._id == userId) {
-    //   getUserLoggedOn();
-    //   console.log()
-    // } else {
-    //   getUserInfo();
-    // }
     getUserInfo();
     console.log(userInfo);
   }, [userId]);

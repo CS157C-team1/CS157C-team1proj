@@ -4,6 +4,7 @@
 .user-info-display {
     @include flexCenter();
     flex-direction: column;
+    float: left;
     // background-color: #474554;
     background-image: linear-gradient(to right, $hotPink, $shockingYellow);
     width: fit-content;
@@ -35,4 +36,11 @@
     h3 {
         font-size: 18px;
     }
+}
+
+.user-items-info {
+    width: fit-content;
+    float: left;
+    margin-top: 50px;
+    margin-left: 50px;
 }

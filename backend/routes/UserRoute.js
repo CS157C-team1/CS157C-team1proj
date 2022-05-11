@@ -10,7 +10,6 @@ router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
     const userData = await User.getUserByObjectId(req.query.userId);
-    console.log(userData);
     if (userData) {
       res.json({
         userInfo: userData,
@@ -170,10 +169,12 @@ router.delete("/deleteWish/:itemId", checkUserLoggedIn, (req, res) => {
   }
 });
 
+// Needs the user ID
 router.get("/getItemsPosted", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const data = await User.getItemsFromPosted(req.user._id.toString());
+    const userId = req.query.userId;
+    const data = await User.getItemsFromPosted(userId);
     // Check If data is only has an array of empty json object
     if (Object.keys(data[0]).length === 0) {
       res.json({

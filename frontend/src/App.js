@@ -7,6 +7,7 @@ import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
 import CheckoutPage from "./components/item/CheckoutPage";
 import ProductPage from "./components/item/ProductPage";
+import UserItemWidget from "./components/UserItemsWidget";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
               {isUserLoggedOn ? (
                 <>
                   <div className="center-div">
-                    <ItemTable />
+                    <ItemTable userInfo={userInfo}/>
                     {/* <ItemDisplay /> */}
                   </div>
                 </>
@@ -74,7 +75,8 @@ function App() {
                 updateUser={checkUserLoggedIn}
                 userInfo={userInfo}
               />
-              <UserPage userLoggedOn={userInfo} />
+              <UserPage />
+              <UserItemWidget />
             </>
           }
         ></Route>

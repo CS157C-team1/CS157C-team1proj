@@ -186,6 +186,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  float: left;
   background-image: -webkit-gradient(linear, left top, right top, from(#f16775), to(#fee36e));
   background-image: linear-gradient(to right, #f16775, #fee36e);
   width: -webkit-fit-content;
@@ -220,6 +221,15 @@
 
 .user-info-display h3 {
   font-size: 18px;
+}
+
+.user-items-info {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: left;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 .checkout-row {
