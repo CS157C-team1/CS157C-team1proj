@@ -48,4 +48,5 @@ module.exports = {
   getItemsByObjId,
   getTotalPriceOfItems,
   getItemsNotIn,
+  getItem
 };
