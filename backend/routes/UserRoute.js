@@ -28,6 +28,7 @@ router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
     res.status(htmlCode).json(htmlError(error.message, htmlCode));
   }
 });
+
 // Add item to Cart of the User using the ObjectID
 router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;

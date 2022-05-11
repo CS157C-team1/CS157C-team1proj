@@ -25,13 +25,11 @@ const UserPage = ({ userLoggedOn }) => {
       })
       .then((res) => {
         setUserInfo(res.data.userInfo);
-        console.log(userInfo);
       })
       .catch((error) => console.log(error.message));
   };
 
   useEffect(() => {
-    console.log(userLoggedOn._id == userId);
     if (userLoggedOn._id == userId) {
       getUserLoggedOn();
     } else {
