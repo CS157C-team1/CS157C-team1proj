@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import ItemDisplay from "./ItemDisplay";
+import { useRef } from "react";
 
 const ItemTable = () => {
   const [listOfItems, setListOfItems] = useState([]); //Items displayed to the User
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
+  let query = useRef(" ");
 
   // Convert Obj Ids to actual Item information
   const getItemsForDisplay = async (itemsPosted) => {
@@ -74,6 +76,22 @@ const ItemTable = () => {
     }
   };
 
+  const searchItems = async () => {
+    console.log(query);
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
+          params: {input: query},
+          withCredentials: true,
+        })
+        .then((res) => {
+          setListOfItems(res.data.itemData);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   useEffect(() => {
     getItemsPosted();
     getItemsInCart();
@@ -81,19 +99,31 @@ const ItemTable = () => {
   }, []);
 
   return (
-    <div className="item-table">
-      {Object.keys(listOfItems).map((index) => {
-        return (
-          <ItemDisplay
-            itemInfo={listOfItems[index]}
-            cartItems={cartItems}
-            wishItems={wishItems}
-            refreshCart={getItemsInCart}
-            refreshWishList={getItemsInWishList}
-          />
-        );
-      })}
-    </div>
+    <>
+      {/* TODO: Search Bar */}
+      <div className ="searchBar">
+        <form>
+          <input type="text" placeholder="Search" onInput={e=> query = e.target.value} />
+          <input type="button" value="Search" onClick={searchItems}/>
+        </form>
+      </div>
+
+      <div className="item-table">
+        {listOfItems.length > 0? Object.keys(listOfItems).map((index) => {
+          return (
+            <ItemDisplay
+              itemInfo={listOfItems[index]}
+              cartItems={cartItems}
+              wishItems={wishItems}
+              refreshCart={getItemsInCart}
+              refreshWishList={getItemsInWishList}
+            />
+          );
+        }) : 
+        // TODO: If results return none
+        <h1> None Found </h1>}
+      </div>
+    </>
   );
 };
 
