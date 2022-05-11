@@ -31,7 +31,7 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
         <div className="navBar">
           {isUserLoggedOn ? (
             <>
-              <Link to="/wishlist">
+              <Link to={"/userpage/" + userInfo._id + "/wishlist"} >
                 <img src={wishListIcon} alt="heart" className="wish"></img>
               </Link>
               <Link to="/cart">

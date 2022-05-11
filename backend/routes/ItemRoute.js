@@ -2,13 +2,13 @@
 const express = require("express");
 const router = express.Router();
 
-
 // Errors
 const { htmlError } = require("../helpers");
 let statusCode;
 
 // Item Collection Model
 const itemModel = require("../models/ItemModel");
+const userModel = require("../models/UserModel");
 
 const { checkUserLoggedIn } = require("./AuthUser");
 
@@ -27,7 +27,7 @@ router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/getItem/:_id", checkUserLoggedIn, async(req, res) => {
+router.get("/getItem/:_id", checkUserLoggedIn, async (req, res) => {
   try {
     const data = await itemModel.getItem(req.params._id);
     res.json({
@@ -67,12 +67,8 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
     if (listOfItemObjIds === "false") {
       cartItemData = [];
     } else if (listOfItemObjIds != null) {
-      cartItemInformation = await itemModel.getItemsByObjId(
-        listOfItemObjIds
-      );
-      totalPrice = await itemModel.getTotalPriceOfItems(
-        cartItemInformation
-      );
+      cartItemInformation = await itemModel.getItemsByObjId(listOfItemObjIds);
+      totalPrice = await itemModel.getTotalPriceOfItems(cartItemInformation);
     } else {
       htmlCode = 400;
       throw new Error("Missing Item Obj ids");
@@ -92,24 +88,55 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   }
 });
 
-// Get All Item Information for Display to User (Not Posted By User, Not Sold Yet)
+// Get All Item Information for Display to User Logged ON(Not Posted By User)
 router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
-  let data = null;
   try {
-    const listOfItemObjIds = req.query.listOfitemObjIds;
-    // Item Obj Id has not been set
-    if (listOfItemObjIds === "false") {
-      data = await itemModel.getAllItems();
-    } else if (listOfItemObjIds != null) {
-      data = await itemModel.getItemsNotIn(listOfItemObjIds);
-    } else {
-      htmlCode = 400;
-      throw new Error("Missing Item Obj ids");
-    }
-
+    const userInfo = await userModel.getUserByObjectId(req.user._id);
+    const listOfPostedItems = userInfo.items_post;
+    const data = await itemModel.getItemsForDisplay(listOfPostedItems);
     res.json({
       itemData: data,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+// Get All Item Information for a wishlist of a given user
+router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const userInfo = await userModel.getUserByObjectId(req.query.userId);
+    const wishlist = userInfo.wishlist;
+    const data = await itemModel.getItemsByObjId(wishlist);
+    res.json({
+      wishList: data,
+      status: "Ok",
+      message: "Able to retrieve Item Information",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+});
+
+// Get All Item Information of bought items of a given user
+router.get("/getItemsBought", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    const userInfo = await userModel.getUserByObjectId(req.query.userId);
+    const listOfBoughtItems = userInfo.items_bought;
+    const data = await itemModel.getItemsByObjId(listOfBoughtItems);
+    res.json({
+      itemsBought: data,
       status: "Ok",
       message: "Able to retrieve Item Information",
     });
