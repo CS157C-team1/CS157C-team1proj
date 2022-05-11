@@ -16,6 +16,26 @@ const getItem = async (id) => {
   });
 };
 
+const searchItems = async (query, type) =>{
+  if(query === "{\"current\":null}" && type === "{\"current\":null}")
+    return await itemCollection.find().toArray().catch((error) => {
+      throw new Error(error.message);
+    });
+  if(query === "{\"current\":null}"){
+    return await itemCollection.find({type: type}).toArray().catch((error) => {
+      throw new Error(error.message);
+    });
+  }
+  if(type === "{\"current\":null}"){
+    return await itemCollection.find({name: {$regex: query, $options: "$i"}}).toArray().catch((error) => {
+      throw new Error(error.message);
+    });
+  }
+  return await itemCollection.find({name: {$regex: query, $options: "$i"}, type: type}).toArray().catch((error) => {
+    throw new Error(error.message);
+  });
+}
+
 const getItemsByObjId = async (listOfItemObjIds) => {
   const finalList = listOfItemObjIds.map((x) => ObjectId(x));
   const cursor = itemCollection.find({ _id: { $in: finalList } });
@@ -48,5 +68,6 @@ module.exports = {
   getItemsByObjId,
   getTotalPriceOfItems,
   getItemsNotIn,
-  getItem
+  getItem,
+  searchItems
 };
