@@ -23,7 +23,7 @@ const ProductPage = (itemInfo) => {
 
     useEffect(() => {
         getItem(id);
-      }, []);
+      }, [id]);
     
     return(
         <div className="item-display" id="productcard">

@@ -12,7 +12,7 @@ import ProductPage from "./components/ProductPage";
 function App() {
   const [isUserLoggedOn, setIsUserLoggedOn] = useState(false);
   const [userInfo, setUserInfo] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   // Check Cookies for SESSION TOKEN
   const checkUserLoggedIn = async () => {
@@ -27,7 +27,7 @@ function App() {
           setIsUserLoggedOn(false);
           setUserInfo(null);
         }
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
 

@@ -92,7 +92,7 @@ const ItemDisplay = ({
       <h3>Condition: {itemInfo.condition}</h3>
       <div className="item-btn-div">
         {/* If item is already sold, do not display buttons */}
-        {itemInfo.sold == true ? (
+        {itemInfo.sold === true ? (
           <h1>Item Already Sold</h1>
         ) : (
           /* Check if Items is in Cart, if it is change button type */
