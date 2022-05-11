@@ -80,7 +80,7 @@ const UserPage = ({ userLoggedOn }) => {
           </div>
 
           <div>
-            <h3 className="field">Address:</h3>
+            <h3 className="field">University:</h3>
             <h3 className="value">
               {userInfo.university != null && Object.keys(userInfo.university).length !== 0
                 ? userInfo.university
