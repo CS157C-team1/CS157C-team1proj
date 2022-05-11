@@ -165,7 +165,6 @@ const ItemDisplay = ({
 
   useEffect(() => {
     getSellerInfo();
-    console.log(itemInfo);
     // Wait for itemInfo to update since it has to be
     // queried from the backend
   }, [itemInfo._id]);
