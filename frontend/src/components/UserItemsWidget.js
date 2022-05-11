@@ -40,7 +40,7 @@ const UserItemWidget = ({}) => {
       {userInfo != null && (
         <div className="user-items-info">
             <div></div>
-          <ItemTable></ItemTable>
+          <ItemTable userInfo={userInfo} displayUserArray="posted"></ItemTable>
         </div>
       )}
     </>

@@ -8,6 +8,7 @@ let statusCode;
 
 // Item Collection Model
 const itemModel = require("../models/ItemModel");
+const userModel = require("../models/UserModel");
 
 const { checkUserLoggedIn } = require("./AuthUser");
 
@@ -77,9 +78,9 @@ router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
 router.get("/getItemsForDisplay", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    
-    const data = await itemModel.getItemsForDisplay(req.user._id);
-    
+    const userInfo = await userModel.getUserByObjectId(req.user._id);
+    const listOfPostedItems = userInfo.items_post;
+    const data = await itemModel.getItemsForDisplay(listOfPostedItems);
     res.json({
       itemData: data,
       status: "Ok",

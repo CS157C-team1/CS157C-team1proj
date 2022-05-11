@@ -1,7 +1,7 @@
 const { ObjectId } = require("mongodb");
 const mongoConnection = require("../mongoConnection");
 const itemCollection = mongoConnection.collection("items");
-const userCollection = require("../models/UserModel");
+const userModel = require("../models/UserModel");
 
 const getAllItems = async () => {
   const cursor = itemCollection.find();
@@ -35,10 +35,8 @@ const getItemsNotIn = async (listOfItemObjIds) => {
   });
 };
 
-const getItemsForDisplay = async (userId) => {
+const getItemsForDisplay = async (listOfPostedItems) => {
   // Get Items that are posted by given userId
-  const userInfo = await userCollection.getUserByObjectId(userId);
-  const listOfPostedItems = userInfo.items_post;
   if (listOfPostedItems === null || listOfPostedItems === undefined) {
     return await getAllItems();
   } else {

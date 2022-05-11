@@ -51,7 +51,7 @@ function App() {
               {isUserLoggedOn ? (
                 <>
                   <div className="center-div">
-                    <ItemTable userInfo={userInfo}/>
+                    <ItemTable userInfo={userInfo} displayUserArray="display"/>
                     {/* <ItemDisplay /> */}
                   </div>
                 </>

@@ -3,25 +3,18 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import ItemDisplay from "./ItemDisplay";
 
-const ItemTable = ({userInfo, items}) => {
+const ItemTable = ({ userInfo, displayUserArray }) => {
   const [listOfItems, setListOfItems] = useState([]); //Items displayed to the User
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
 
-  // Convert Obj Ids to actual Item information
-  const getItemsForDisplay = async (itemsPosted) => {
-    if (itemsPosted.length === 0) {
-      itemsPosted = false;
-    }
-
+  // Get Items For Display in Home Page
+  const getItemsForDisplay = async () => {
     try {
       const instance = axios.create({ withCredentials: true });
       await instance
         .get(
-          `${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsForDisplay`,
-          {
-            params: { listOfitemObjIds: itemsPosted },
-          }
+          `${process.env.REACT_APP_BASE_BACKEND}/api/item/getItemsForDisplay`
         )
         .then((res) => {
           setListOfItems(res.data.itemData);
@@ -36,10 +29,10 @@ const ItemTable = ({userInfo, items}) => {
     const instance = axios.create({ withCredentials: true });
     await instance
       .get(`${process.env.REACT_APP_BASE_BACKEND}/api/user/getItemsPosted`, {
-        params: { userId: userInfo._id }
+        params: { userId: userInfo._id },
       })
       .then((res) => {
-        getItemsForDisplay(res.data.itemsPosted);
+        setListOfItems(res.data.itemsPosted);
       })
       .catch((error) => console.log(error.message));
   };
@@ -75,9 +68,13 @@ const ItemTable = ({userInfo, items}) => {
   };
 
   useEffect(() => {
-    getItemsPosted();
-    getItemsInCart();
-    getItemsInWishList();
+    if (displayUserArray === "display") {
+      getItemsForDisplay();
+      getItemsInCart();
+      getItemsInWishList();
+    } else if (displayUserArray === "posted") {
+      getItemsPosted();
+    }
   }, []);
 
   return (
