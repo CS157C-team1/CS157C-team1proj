@@ -115,7 +115,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } else if (displayUserArray === "bought") {
       getBoughtItems();
     }
-  }, [listOfItems]);
+  }, [wishItems]);
 
   return (
     <>
