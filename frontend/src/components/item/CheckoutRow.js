@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import deleteIcon from "../images/deleteX.png";
+import deleteIcon from "../../images/deleteX.png";
 
 const CheckoutRow = ({ itemInfo, refreshCart }) => {
   const removeItemFromCart = async (e) => {

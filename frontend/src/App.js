@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Routes} from "react-router-dom";
 import WelcomeCard from "./components/WelcomeCard";
 import ItemTable from "./components/item/ItemTable";
 import UserPage from "./components/UserPage";
-import CheckoutPage from "./components/CheckoutPage";
-import ProductPage from "./components/ProductPage";
+import CheckoutPage from "./components/item/CheckoutPage";
+import ProductPage from "./components/item/ProductPage";
 // import ItemDisplay from "./components/ItemDisplay";
 
 function App() {
