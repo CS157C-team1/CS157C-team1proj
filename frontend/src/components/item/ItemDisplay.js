@@ -9,6 +9,7 @@ const ItemDisplay = ({
   wishItems,
   refreshCart,
   refreshWishList,
+  displayType,
 }) => {
   const [sellerInfo, setSellerInfo] = useState(null);
 
@@ -86,10 +87,75 @@ const ItemDisplay = ({
         params: { userId: itemInfo.seller },
       })
       .then((res) => {
-        console.log(res);
         setSellerInfo(res.data.userInfo);
       })
       .catch((error) => console.log(error.message));
+  };
+
+  const getButtons = () => {
+    // If Item is sold, no Buttons just text
+    if (itemInfo.sold == true) {
+      return <h1>Item Sold</h1>;
+      // Do not display buttons if item table is in posted or bought
+    } else if (displayType != "posted" && displayType != "bought") {
+      // Display buttons depending on if they are already in cart and 
+      // wishlist
+      if (cartItems == null || !cartItems.includes(itemInfo._id)) {
+        if (wishItems == null || !wishItems.includes(itemInfo._id)) {
+          return (
+            <>
+              <button className="btn" onClick={addItemToCart}>
+                Add to Cart
+              </button>
+              <button className="btn-wishlist" onClick={addItemToWishList}>
+                Add to Wishlist
+              </button>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <button className="btn" onClick={addItemToCart}>
+                Add to Cart
+              </button>
+              <button
+                className="btn-wishlist btn-remove"
+                onClick={removeItemsFromWishList}
+              >
+                Remove from wishlist
+              </button>
+            </>
+          );
+        }
+      } else {
+        if (wishItems == null || !wishItems.includes(itemInfo._id)) {
+          return (
+            <>
+              <button className="btn-remove" onClick={removeItemFromCart}>
+                Remove From Cart
+              </button>
+              <button className="btn-wishlist" onClick={addItemToWishList}>
+                Add to Wishlist
+              </button>
+            </>
+          );
+        } else {
+          return (
+            <>
+              <button className="btn-remove" onClick={removeItemFromCart}>
+                Remove From Cart
+              </button>
+              <button
+                className="btn-wishlist btn-remove"
+                onClick={removeItemsFromWishList}
+              >
+                Remove from wishlist
+              </button>
+            </>
+          );
+        }
+      }
+    }
   };
 
   const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -99,6 +165,7 @@ const ItemDisplay = ({
 
   useEffect(() => {
     getSellerInfo();
+    console.log(displayType);
   }, []);
 
   return (
@@ -132,47 +199,7 @@ const ItemDisplay = ({
         <h2>{currencyFormatter.format(itemInfo.price)}</h2>
         <h3>Type: {itemInfo.type}</h3>
         <h3>Condition: {itemInfo.condition}</h3>
-        <div className="item-btn-div">
-          {/* If item is already sold, do not display buttons */}
-          {itemInfo.sold === true ? (
-            <h1>Item Already Sold</h1>
-          ) : (
-            /* Check if Items is in Cart, if it is change button type */
-            <>
-              {cartItems == null ? (
-                <button className="btn" onClick={addItemToCart}>
-                  Add to Cart
-                </button>
-              ) : cartItems.includes(itemInfo._id) ? (
-                <button className="btn-remove" onClick={removeItemFromCart}>
-                  Remove Item From Cart
-                </button>
-              ) : (
-                <button className="btn" onClick={addItemToCart}>
-                  Add to Cart
-                </button>
-              )}
-
-              {/* Check if Items is in Cart, if it is change button type */}
-              {wishItems == null ? (
-                <button className="btn-wishlist" onClick={addItemToWishList}>
-                  Add to WishList
-                </button>
-              ) : wishItems.includes(itemInfo._id) ? (
-                <button
-                  className="btn-wishlist btn-remove"
-                  onClick={removeItemsFromWishList}
-                >
-                  Remove Item From WishList
-                </button>
-              ) : (
-                <button className="btn-wishlist" onClick={addItemToWishList}>
-                  Add to WishList
-                </button>
-              )}
-            </>
-          )}
-        </div>
+        <div className="item-btn-div">{getButtons()}</div>
       </div>
     )
   );

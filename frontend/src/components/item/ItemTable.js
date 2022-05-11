@@ -87,6 +87,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
             wishItems={wishItems}
             refreshCart={getItemsInCart}
             refreshWishList={getItemsInWishList}
+            displayType={displayUserArray}
           />
         );
       })}
