@@ -66,8 +66,10 @@ router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
 
     // Get Info the user that wants to search for Items
     const userInfo = await userModel.getUserByObjectId(req.query.userId)
-    let listItemIds = await itemModel.getAllItems()
+    const allItems = await itemModel.getAllItems()
 
+    let listItemIds = allItems.map((elem) => elem._id)
+    // console.log(listItemIds)
     // Depending on display type, get that list for from user information
     if (req.query.displayType === "posted") {
       listItemIds = userInfo.items_post
@@ -76,7 +78,7 @@ router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
     } else if (req.query.displayType === "bought") {
       listItemIds = userInfo.items_bought
     }
-
+    console.log
     data = await itemModel.searchItems(req.query.input, req.query.type, listItemIds);
     res.json({
       itemData: data,

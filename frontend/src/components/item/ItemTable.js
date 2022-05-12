@@ -142,7 +142,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
 
   return (
     <>
-      {listOfItems == null || listOfItems.length == 0 ? (
+      {listOfItems == null || listOfItems.length === 0 ? (
         <>
           <h1>No Items to display</h1>
           <div className="search-bar">

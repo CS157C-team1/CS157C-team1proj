@@ -10,6 +10,9 @@ const getAllItems = async () => {
   });
 };
 
+const getAllItemIds = async () => {
+  
+}
 const getItem = async (id) => {
   var o_id = new ObjectId(id);
   return await itemCollection.findOne({ _id: o_id }).catch((error) => {
