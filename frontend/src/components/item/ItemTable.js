@@ -72,6 +72,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
 
   const searchItems = async () => {
     console.log(query)
+    const form = document.getElementById('myForm')
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
@@ -80,16 +81,12 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         })
         .then((res) => {
           setListOfItems(res.data.itemData);
+          form.reset();
         });
     } catch (error) {
       console.log(error.message);
     }
-
-    console.log(query.toString() === "{\"current\":null}")
-    // Reset Search Bar After search
-    if (query.toString() === "{\"current\":null}") {
-      document.getElementById("search").value = '';
-    }
+ 
     const select = document.getElementById("itemDropdown");
     select.value = 'Any'
   };
@@ -149,7 +146,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         <>
           <h1>No Items to display</h1>
           <div className="search-bar">
-            <form>
+            <form id="searchForm">
               <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
               <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
