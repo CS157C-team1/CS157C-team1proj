@@ -1,0 +1,56 @@
+@import "./mixins";
+@import "./variables";
+
+.user-info-display {
+  @include flexCenter();
+  flex-direction: column;
+  float: left;
+  // background-color: #474554;
+  background-image: linear-gradient(to right, $hotPink, $shockingYellow);
+  width: fit-content;
+  min-width: 20%;
+  margin-top: 50px;
+  margin-left: 50px;
+  padding: 10px;
+  border-radius: 5%;
+  color: white;
+
+  img {
+    width: 100px;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  div {
+    width: 100%;
+    .field {
+      float: left;
+    }
+
+    .value {
+      float: right;
+    }
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+}
+
+.user-items-info {
+  width: fit-content;
+  float: left;
+  margin-top: 50px;
+  margin-left: 50px;
+
+  .div-left {
+      float: left;
+  }
+  .user-nav-bar {
+    div {
+      float: left;
+      margin-right: 50px;
+    }
+  }
+}

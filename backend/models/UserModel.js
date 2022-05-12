@@ -105,5 +105,5 @@ module.exports = {
   getItemsInWishList,
   removeItemsFromWishList,
   getItemsFromPosted,
-  getUserByObjectId
+  getUserByObjectId,
 };

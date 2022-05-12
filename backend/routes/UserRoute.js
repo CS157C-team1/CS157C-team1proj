@@ -1,7 +1,8 @@
 const express = require("express");
 const { htmlError } = require("../helpers");
 const router = express.Router();
-const User = require("../models/UserModel");
+const userModel = require("../models/UserModel");
+const itemModel = require("../models/ItemModel");
 const { checkUserLoggedIn } = require("./AuthUser");
 
 // Link: /api/user/...
@@ -9,8 +10,7 @@ const { checkUserLoggedIn } = require("./AuthUser");
 router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const userData = await User.getUserByObjectId(req.query.userId);
-    console.log(userData);
+    const userData = await userModel.getUserByObjectId(req.query.userId);
     if (userData) {
       res.json({
         userInfo: userData,
@@ -21,7 +21,7 @@ router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
       htmlCode = 400;
       throw new Error("Could not find User");
     }
-  } catch {
+  } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
     }
@@ -35,7 +35,7 @@ router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   try {
     const itemId = req.body.itemId;
     if (itemId) {
-      User.addItemToCart(req.user._id.toString(), itemId);
+      userModel.addItemToCart(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
         message: "Item added to Cart",
@@ -56,7 +56,7 @@ router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
 router.get("/getCart", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const data = await User.getItemsInCart(req.user._id.toString());
+    const data = await userModel.getItemsInCart(req.user._id.toString());
     res.json({
       cartItems: data[0].itemCart,
       status: "Ok",
@@ -92,7 +92,7 @@ router.delete("/deleteCart/:itemId", checkUserLoggedIn, (req, res) => {
   try {
     const itemId = req.params.itemId;
     if (itemId) {
-      User.removeItemFromCart(req.user._id.toString(), itemId);
+      userModel.removeItemFromCart(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
         message: "Item successfully deleted from Cart",
@@ -114,7 +114,7 @@ router.post("/addWish/:itemId", checkUserLoggedIn, async (req, res) => {
   try {
     const itemId = req.body.itemId;
     if (itemId) {
-      User.addItemToWishList(req.user._id.toString(), itemId);
+      userModel.addItemToWishList(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
         message: "Item added to Wish List",
@@ -134,7 +134,7 @@ router.post("/addWish/:itemId", checkUserLoggedIn, async (req, res) => {
 router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const data = await User.getItemsInWishList(req.user._id.toString());
+    const data = await userModel.getItemsInWishList(req.user._id.toString());
     res.json({
       wishListItems: data[0].wishlist,
       status: "Ok",
@@ -153,7 +153,7 @@ router.delete("/deleteWish/:itemId", checkUserLoggedIn, (req, res) => {
   try {
     const itemId = req.params.itemId;
     if (itemId) {
-      User.removeItemsFromWishList(req.user._id.toString(), itemId);
+      userModel.removeItemsFromWishList(req.user._id.toString(), itemId);
       res.json({
         status: "Ok",
         message: "Item successfully deleted from Wish List",
@@ -170,20 +170,27 @@ router.delete("/deleteWish/:itemId", checkUserLoggedIn, (req, res) => {
   }
 });
 
+// Needs the user ID
 router.get("/getItemsPosted", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const data = await User.getItemsFromPosted(req.user._id.toString());
+    const userId = req.query.userId;
+    // Grabs only the Obj ids of posted items
+    const listOfItemObjIds = await userModel.getItemsFromPosted(userId);
     // Check If data is only has an array of empty json object
-    if (Object.keys(data[0]).length === 0) {
+    if (Object.keys(listOfItemObjIds[0]).length === 0) {
       res.json({
         itemsPosted: [],
         status: "Ok",
-        message: "All Items Posted by User Retrieved",
+        message: "User does not have posted items",
       });
     } else {
+      // Grab actual item info using list of item obj ids
+      const listOfItemInfo = await itemModel.getItemsByObjId(
+        listOfItemObjIds[0].items_post
+      );
       res.json({
-        itemsPosted: data[0].items_post,
+        itemsPosted: listOfItemInfo,
         status: "Ok",
         message: "All Items Posted by User Retrieved",
       });
