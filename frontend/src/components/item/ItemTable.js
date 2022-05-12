@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import ItemDisplay from "./ItemDisplay";
+import { useRef } from "react";
 
 const ItemTable = ({ userInfo, displayUserArray }) => {
   const [listOfItems, setListOfItems] = useState([]); //Items displayed to the User
   const [cartItems, setCartItems] = useState([]);
   const [wishItems, setWishItems] = useState([]);
+  let query = useRef(null);
+  let type = useRef(null);
 
   // Get Items For Display in Home Page
   const getItemsForDisplay = async () => {
@@ -67,6 +70,26 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     }
   };
 
+  const searchItems = async () => {
+    if (type !== "{\"current\":null}") {
+      const radio = document.querySelector('input[type=radio][id=' + type + ']:checked');
+      radio.checked = false;
+    }
+
+    try {
+      await axios
+        .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
+          params: { input: query, type: type },
+          withCredentials: true,
+        })
+        .then((res) => {
+          setListOfItems(res.data.itemData);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const getItemInfoInWishList = async () => {
     try {
       const instance = axios.create({ withCredentials: true });
@@ -115,7 +138,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } else if (displayUserArray === "bought") {
       getBoughtItems();
     }
-  }, [wishItems]);
+  }, [wishItems.length]);
 
   return (
     <>
@@ -123,6 +146,27 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         <h1>No Items to display</h1>
       ) : (
         <>
+          {/* TODO: Search Bar */}
+          <div className="searchBar">
+            <form>
+              <input type="text" placeholder="Search" onInput={e => query = e.target.value} />
+              <input type="button" value="Search" onClick={searchItems} />
+            </form>
+          </div>
+          <div className="filter">
+            <form>
+              <input type="radio" name="type" id="Book" onClick={e => type = e.target.id} />
+              <label for="Book">Book</label><br />
+              <input type="radio" name="type" id="Furniture" onClick={e => type = e.target.id} />
+              <label for="Furniture">Furniture</label><br />
+              <input type="radio" name="type" id="Electronics" onClick={e => type = e.target.id} />
+              <label for="Electronics">Electronics</label><br />
+              <input type="radio" name="type" id="Entertainment" onClick={e => type = e.target.id} />
+              <label for="Entertainment">Entertainment</label><br />
+              <input type="radio" name="type" id="Accessory" onClick={e => type = e.target.id} />
+              <label for="Accessory">Accessory</label><br />
+            </form>
+          </div>
           <div className="item-table">
             {Object.keys(listOfItems).map((index) => {
               return (

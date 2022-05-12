@@ -41,6 +41,20 @@ router.get("/getItem/:_id", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+router.get("/searchItems", checkUserLoggedIn, async(req, res) => {
+  try {
+      data = await itemModel.searchItems(req.query.input, req.query.type);
+    res.json({
+      itemData: data,
+    });
+  } catch (error) {
+    if (!statusCode) {
+      statusCode = 422;
+    }
+    res.status(statusCode).json(htmlError(error));
+  }
+});
+
 // Gets list of Item Obj Ids from req and returns back actual Item information
 router.get("/getItemsByIds", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
