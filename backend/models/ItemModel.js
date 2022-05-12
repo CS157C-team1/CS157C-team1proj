@@ -17,30 +17,38 @@ const getItem = async (id) => {
   });
 };
 
-const searchItems = async (query, type) => {
+const searchItems = async (query, type, listItemIds) => {
+
+  // Check of listItemIds do not exist
+  if (listItemIds === null || listItemIds === undefined) {
+    return await [];
+  }
+  // Take the obj id string in list and turn them to actual Objects
+  const finalList = listItemIds.map((x) => ObjectId(x));
+
   if (query === "{\"current\":\"Any\"}") {
     query = "{\"current\":null}"
   }
 
   if (query === "{\"current\":null}" && type === "{\"current\":null}") {
     console.log("Both null")
-    return await itemCollection.find().toArray().catch((error) => {
+    return await itemCollection.find({ _id: { $in: finalList } }).toArray().catch((error) => {
       throw new Error(error.message);
     });
   }
   if (query === "{\"current\":null}") {
     console.log("query null")
-    return await itemCollection.find({ type: type }).toArray().catch((error) => {
+    return await itemCollection.find({ _id: { $in: finalList }, type: type }).toArray().catch((error) => {
       throw new Error(error.message);
     });
   }
   if (type === "{\"current\":null}") {
     console.log("type null")
-    return await itemCollection.find({ name: { $regex: query, $options: "$i" } }).toArray().catch((error) => {
+    return await itemCollection.find({ _id: { $in: finalList }, name: { $regex: query, $options: "$i" } }).toArray().catch((error) => {
       throw new Error(error.message);
     });
   }
-  return await itemCollection.find({ name: { $regex: query, $options: "$i" }, type: type }).toArray().catch((error) => {
+  return await itemCollection.find({ _id: { $in: finalList }, name: { $regex: query, $options: "$i" }, type: type }).toArray().catch((error) => {
     console.log("non null")
     throw new Error(error.message);
   });

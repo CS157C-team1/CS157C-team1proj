@@ -1,4 +1,5 @@
 // Routers
+const e = require("express");
 const express = require("express");
 const router = express.Router();
 
@@ -41,9 +42,23 @@ router.get("/getItem/:_id", checkUserLoggedIn, async (req, res) => {
   }
 });
 
-router.get("/searchItems", checkUserLoggedIn, async(req, res) => {
+router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
   try {
-      data = await itemModel.searchItems(req.query.input, req.query.type);
+
+    // Get Info the user that wants to search for Items
+    const userInfo = await userModel.getUserByObjectId(req.query.userId)
+    let listItemIds = await itemModel.getAllItems()
+
+    // Depending on display type, get that list for from user information
+    if (req.query.displayType === "posted") {
+      listItemIds = userInfo.items_post
+    } else if (req.query.displayType === "wishlist") {
+      listItemIds = userInfo.wishlist
+    } else if (req.query.displayType === "bought") {
+      listItemIds = userInfo.items_bought
+    }
+
+    data = await itemModel.searchItems(req.query.input, req.query.type, listItemIds);
     res.json({
       itemData: data,
     });

@@ -72,15 +72,15 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
 
   const searchItems = async () => {
     console.log(query)
-    const form = document.getElementById('myForm')
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
-          params: { input: query, type: type },
+          params: { input: query, type: type, userId: userInfo._id, displayType: displayUserArray},
           withCredentials: true,
         })
         .then((res) => {
           setListOfItems(res.data.itemData);
+          const form = document.getElementById('myForm')
           form.reset();
         });
     } catch (error) {
@@ -146,7 +146,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         <>
           <h1>No Items to display</h1>
           <div className="search-bar">
-            <form id="searchForm">
+            <form id="myForm">
               <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
               <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
@@ -164,8 +164,8 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         <>
           {/* TODO: Search Bar */}
           <div className="search-bar">
-            <form>
-              <input type="text" placeholder="Search" onInput={e => query = e.target.value} />
+            <form id="myForm">
+              <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
               <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
                 <option value="Furniture">Furniture</option>
