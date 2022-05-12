@@ -139,7 +139,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
       {listOfItems == null || listOfItems.length == 0 ? (
         <>
           <h1>No Items to display</h1>
-          <div className="searchBar">
+          <div className="search-bar">
             <form>
               <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
               <select onChange={(e) => type = e.target.value}>
@@ -157,7 +157,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
       ) : (
         <>
           {/* TODO: Search Bar */}
-          <div className="searchBar">
+          <div className="search-bar">
             <form>
               <input type="text" placeholder="Search" onInput={e => query = e.target.value} />
               <select onChange={(e) => type = e.target.value}>
@@ -170,20 +170,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
               <input type="button" value="Search" onClick={searchItems} />
             </form>
           </div>
-          {/* <div className="filter">
-            <form>
-              <input type="radio" name="type" id="Book" onClick={e => type = e.target.id} />
-              <label for="Book">Book</label><br />
-              <input type="radio" name="type" id="Furniture" onClick={e => type = e.target.id} />
-              <label for="Furniture">Furniture</label><br />
-              <input type="radio" name="type" id="Electronics" onClick={e => type = e.target.id} />
-              <label for="Electronics">Electronics</label><br />
-              <input type="radio" name="type" id="Entertainment" onClick={e => type = e.target.id} />
-              <label for="Entertainment">Entertainment</label><br />
-              <input type="radio" name="type" id="Accessory" onClick={e => type = e.target.id} />
-              <label for="Accessory">Accessory</label><br />
-            </form>
-          </div> */}
+         
           <div className="item-table">
             {Object.keys(listOfItems).map((index) => {
               return (
