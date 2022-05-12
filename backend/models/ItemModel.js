@@ -92,7 +92,7 @@ const getItemsForDisplay = async (listOfPostedItems) => {
 const getTotalPriceOfItems = async (listOfItemJsonObjs) => {
   var totalPrice = 0;
   listOfItemJsonObjs.forEach((itemObj) => {
-    totalPrice = itemObj.price + totalPrice;
+    totalPrice = parseInt(itemObj.price) + totalPrice;
   });
   return await totalPrice;
 };
