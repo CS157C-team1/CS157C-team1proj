@@ -71,11 +71,6 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
   };
 
   const searchItems = async () => {
-    if (type !== "{\"current\":null}") {
-      const radio = document.querySelector('input[type=radio][id=' + type + ']:checked');
-      radio.checked = false;
-    }
-
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
@@ -114,7 +109,6 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
         })
         .then((res) => {
           setListOfItems(res.data.itemsBought);
-          console.log(listOfItems);
         });
     } catch (error) {
       console.log(error.message);
@@ -138,22 +132,45 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } else if (displayUserArray === "bought") {
       getBoughtItems();
     }
-  }, [wishItems.length]);
+  }, [wishItems.length, displayUserArray]);
 
   return (
     <>
       {listOfItems == null || listOfItems.length == 0 ? (
-        <h1>No Items to display</h1>
+        <>
+          <h1>No Items to display</h1>
+          <div className="searchBar">
+            <form>
+              <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
+              <select onChange={(e) => type = e.target.value}>
+                <option value="Any" selected>Any Item Type</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Accessory">Accessory</option>
+              </select>
+              <input type="button" value="Search" onClick={searchItems} />
+            </form>
+          </div>
+        </>
+
       ) : (
         <>
           {/* TODO: Search Bar */}
           <div className="searchBar">
             <form>
               <input type="text" placeholder="Search" onInput={e => query = e.target.value} />
+              <select onChange={(e) => type = e.target.value}>
+                <option value="Any" selected>Any Item Type</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Accessory">Accessory</option>
+              </select>
               <input type="button" value="Search" onClick={searchItems} />
             </form>
           </div>
-          <div className="filter">
+          {/* <div className="filter">
             <form>
               <input type="radio" name="type" id="Book" onClick={e => type = e.target.id} />
               <label for="Book">Book</label><br />
@@ -166,7 +183,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
               <input type="radio" name="type" id="Accessory" onClick={e => type = e.target.id} />
               <label for="Accessory">Accessory</label><br />
             </form>
-          </div>
+          </div> */}
           <div className="item-table">
             {Object.keys(listOfItems).map((index) => {
               return (
