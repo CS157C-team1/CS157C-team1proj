@@ -48,12 +48,12 @@ const ProductPage = (itemInfo) => {
     
     return(
         <div className="item-display" id="productcard">
-            {list.image == null ? (
+            {list.image == null || itemInfo.image === ""? (
                <div className="item-img-size item-empty-image" id="productimg">
                    <h1 >NO <br/>IMAGE<br/> FOUND</h1>
                </div> 
             ) : (
-                <image></image>
+                <img src={list.image} className="item-img-size" ></img>
             )}
             {Object.keys(list).filter((index) => index !== "_id" && index !== "seller" && index !== "sold").map((index) => {
                 return <h3>{index[0].toUpperCase() + index.slice(1)}: {list[index]}</h3>;

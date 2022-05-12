@@ -172,7 +172,7 @@ const ItemDisplay = ({
   return (
     sellerInfo != null && (
       <div className="item-display">
-        {itemInfo.image == null ? (
+        {itemInfo.image == null || itemInfo.image === ""? (
           <div className="item-img-size item-empty-image">
             <h1>
               NO <br />
@@ -181,7 +181,7 @@ const ItemDisplay = ({
             </h1>
           </div>
         ) : (
-          <image></image>
+          <img src={itemInfo.image} className="item-img-size"></img>
         )}
         <h2 className="item-display-name" onClick={ShowProduct}>
           {itemInfo.name}

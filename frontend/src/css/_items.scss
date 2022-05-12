@@ -46,12 +46,8 @@
 }
 
 .item-img-size {
-    width: 250px;
-    height: 250px;
-}
-
-.item-empty-image {
     @include flexCenter();
+    width: 250px;
     border: solid 1px;
     border-radius: 25px;
     margin-bottom: 10px;
@@ -61,6 +57,10 @@
         color: $scarlet;
         text-align: center;
     }
+}
+
+.item-empty-image {
+    height: 250px;
 }
 
 .item-table {

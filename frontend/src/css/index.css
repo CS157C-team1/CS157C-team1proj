@@ -55,11 +55,6 @@
 }
 
 .item-img-size {
-  width: 250px;
-  height: 250px;
-}
-
-.item-empty-image {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,15 +64,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 250px;
   border: solid 1px;
   border-radius: 25px;
   margin-bottom: 10px;
 }
 
-.item-empty-image h1 {
+.item-img-size h1 {
   font-size: 32px;
   color: #B85042;
   text-align: center;
+}
+
+.item-empty-image {
+  height: 250px;
 }
 
 .item-table {

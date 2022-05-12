@@ -20,7 +20,7 @@ const CheckoutRow = ({ itemInfo, refreshCart }) => {
 
   return (
     <div className="checkout-row">
-      {itemInfo.image == null ? (
+      {itemInfo.image === null || itemInfo.image === "" ? (
         <div className="checkout-img">
           <h1>
             NO <br />
@@ -29,7 +29,7 @@ const CheckoutRow = ({ itemInfo, refreshCart }) => {
           </h1>
         </div>
       ) : (
-        <image></image>
+        <image className="checkoutimg"></image>
       )}
       <div className="item-info">
         <h1>{itemInfo.name}</h1>
