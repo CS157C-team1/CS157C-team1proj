@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 const ProductPage = (itemInfo) => {
     let {id} = useParams();
     const [list, setList] = useState([]);
+    const getItem = async (id) => {
         try {
             await axios
                 .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/getItem/` + id, {
