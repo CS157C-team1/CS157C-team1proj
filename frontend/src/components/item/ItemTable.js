@@ -150,6 +150,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
               <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
               <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
+                <option value="Book">Book</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Entertainment">Entertainment</option>

@@ -94,6 +94,12 @@ const getTotalPriceOfItems = async (listOfItemJsonObjs) => {
   return await totalPrice;
 };
 
+const addItem = async (itemInfo) => {
+  return await itemCollection.insertOne(itemInfo).catch((error) => {
+    throw new Error("Item could not be added: " + error.message);
+  });
+}
+
 module.exports = {
   getAllItems,
   getItemsByObjId,
@@ -101,5 +107,6 @@ module.exports = {
   getItemsNotIn,
   getItem,
   searchItems,
-  getItemsForDisplay
+  getItemsForDisplay,
+  addItem
 };

@@ -13,6 +13,18 @@ const userModel = require("../models/UserModel");
 
 const { checkUserLoggedIn } = require("./AuthUser");
 
+router.post("/addItem", checkUserLoggedIn, (req, res) => {
+  let htmlCode = null
+  try {
+    
+  } catch (error ) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+})
+
 router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
   // TODO: GET ONLY ITEMS that are for sale.
   try {
@@ -21,10 +33,10 @@ router.get("/getAllItems", checkUserLoggedIn, async (req, res) => {
       itemArray: data,
     });
   } catch (error) {
-    if (!statusCode) {
-      statusCode = 422;
+    if (!htmlCode) {
+      htmlCode = 422;
     }
-    res.status(statusCode).json(htmlError(error));
+    res.status(htmlCode).json(htmlError(error));
   }
 });
 
