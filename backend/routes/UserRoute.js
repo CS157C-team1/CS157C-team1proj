@@ -137,7 +137,7 @@ router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
     let data = await userModel.getUserByObjectId(req.user._id.toString());
     if(data.wishlist == null)
      {
-       data = []
+       data.wishlist = []
      }
     res.json({
       wishListItems: data.wishlist,

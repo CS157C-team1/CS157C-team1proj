@@ -140,7 +140,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } else if (displayUserArray === "bought") {
       getBoughtItems();
     }
-  }, [wishItems, displayUserArray]);
+  }, [wishItems.length, displayUserArray]);
 
   return (
     <>
