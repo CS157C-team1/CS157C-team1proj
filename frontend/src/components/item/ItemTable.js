@@ -122,6 +122,8 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
   };
 
   useEffect(() => {
+    console.log(userInfo)
+    console.log()
     // Display item for logged in user
     if (displayUserArray === "display") {
       getObjIdsInCart();

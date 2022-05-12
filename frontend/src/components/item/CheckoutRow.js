@@ -29,7 +29,7 @@ const CheckoutRow = ({ itemInfo, refreshCart }) => {
           </h1>
         </div>
       ) : (
-        <img src={itemInfo.image} className="item-img-size" alt="Picture"></img>
+        <img src={itemInfo.image} className="item-img-size" alt="itemImg"></img>
       )}
       <div className="item-info">
         <h1>{itemInfo.name}</h1>

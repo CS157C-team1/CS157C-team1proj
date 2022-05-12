@@ -134,9 +134,13 @@ router.post("/addWish/:itemId", checkUserLoggedIn, async (req, res) => {
 router.get("/getWishList", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
   try {
-    const data = await userModel.getItemsInWishList(req.user._id.toString());
+    let data = await userModel.getUserByObjectId(req.user._id.toString());
+    if(data.wishlist == null)
+     {
+       data = []
+     }
     res.json({
-      wishListItems: data[0].wishlist,
+      wishListItems: data.wishlist,
       status: "Ok",
       message: "All Items retrieved from Wish List",
     });
