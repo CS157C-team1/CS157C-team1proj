@@ -13,10 +13,17 @@ const userModel = require("../models/UserModel");
 
 const { checkUserLoggedIn } = require("./AuthUser");
 
-router.post("/addItem", checkUserLoggedIn, (req, res) => {
+router.post("/addItem", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null
   try {
-    
+    const itemInfo = req.body
+    itemInfo.seller = req.user._id
+    const itemId = await itemModel.addItem(itemInfo)
+    await userModel.addItemToPosted(req.user._id, itemId.insertedId)
+    res.json({
+      status: "Ok",
+      message: "Item added to User Posted",
+    });
   } catch (error ) {
     if (!htmlCode) {
       htmlCode = 422;

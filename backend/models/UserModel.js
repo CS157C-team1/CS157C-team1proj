@@ -94,6 +94,15 @@ const getItemsFromPosted = async (userObjId) => {
   });
 };
 
+const addItemToPosted = async (userObjId, itemObjID) => {
+  console.log(userObjId + itemObjID)
+  const filter = { _id: ObjectId(userObjId) };
+  const updateDocument = { $addToSet: { items_post: ObjectId(itemObjID) } };
+  await userCollection.updateOne(filter, updateDocument).catch((error) => {
+    throw new Error(error.message);
+  });
+}
+
 module.exports = {
   getAllUsersCol,
   insertUserCol,
@@ -106,4 +115,5 @@ module.exports = {
   removeItemsFromWishList,
   getItemsFromPosted,
   getUserByObjectId,
+  addItemToPosted
 };

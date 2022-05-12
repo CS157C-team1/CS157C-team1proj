@@ -1,5 +1,6 @@
 import { Modal } from "react-bootstrap";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { useState } from "react";
 
 const AddItemModal = ({ showModal, setShowModal }) => {
@@ -8,12 +9,24 @@ const AddItemModal = ({ showModal, setShowModal }) => {
   const addItem = async (event) => {
     event.preventDefault()
     const formElements = document.getElementById('itemForm').elements
-    console.log(formElements)
+    // console.log(formElements)
+    let newItem = {sold: false}
     for (let i = 0; i < formElements.length; i++) {
-      console.log(formElements[i].name + ": " + formElements[i].value)
+      // console.log(formElements[i].name + ": " + formElements[i].value)
+      const field = formElements[i].name
+      const value = formElements[i].value
+      if(field !== "") {
+        newItem[field.toString()] = value
+      }
+      // console.log(newItem)
     }
-   
+    console.log(newItem)
+    const instance = axios.create({withCredentials: true})
     setShowModal(false)
+    await instance.post(`${process.env.REACT_APP_BASE_BACKEND}/api/item/addItem`, newItem)
+    .then(() => {
+      setShowModal(false)
+    })
   }
 
   const getFields = () => {
@@ -32,7 +45,7 @@ const AddItemModal = ({ showModal, setShowModal }) => {
           <br />
         </>
       )
-    } else if (itemType == "Furniture") {
+    } else if (itemType === "Furniture") {
       return (
         <>
           <label htmlFor="weight">
@@ -63,6 +76,11 @@ const AddItemModal = ({ showModal, setShowModal }) => {
           <label htmlFor="name">
             Item Name: <br />
             <input type="text" id="name" name="name" />
+          </label>
+          <br />
+          <label htmlFor="image">
+            Image Url: <br />
+            <input type="text" id="image" name="image" />
           </label>
           <br />
           <label htmlFor="price">
