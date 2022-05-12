@@ -71,6 +71,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
   };
 
   const searchItems = async () => {
+    console.log(query)
     try {
       await axios
         .get(`${process.env.REACT_APP_BASE_BACKEND}/api/item/searchItems/`, {
@@ -83,11 +84,14 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } catch (error) {
       console.log(error.message);
     }
+
+    console.log(query.toString() === "{\"current\":null}")
     // Reset Search Bar After search
     if (query.toString() === "{\"current\":null}") {
       document.getElementById("search").value = '';
     }
-    const select = document.getElementById("itemDropdown").value = 'Any';
+    const select = document.getElementById("itemDropdown");
+    select.value = 'Any'
   };
 
   const getItemInfoInWishList = async () => {
