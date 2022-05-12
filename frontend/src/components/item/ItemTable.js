@@ -83,6 +83,11 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
     } catch (error) {
       console.log(error.message);
     }
+    // Reset Search Bar After search
+    if (query.toString() === "{\"current\":null}") {
+      document.getElementById("search").value = '';
+    }
+    const select = document.getElementById("itemDropdown").value = 'Any';
   };
 
   const getItemInfoInWishList = async () => {
@@ -142,7 +147,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
           <div className="search-bar">
             <form>
               <input type="text" id="search" placeholder="Search" onInput={e => query = e.target.value} />
-              <select onChange={(e) => type = e.target.value}>
+              <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Electronics">Electronics</option>
@@ -160,7 +165,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
           <div className="search-bar">
             <form>
               <input type="text" placeholder="Search" onInput={e => query = e.target.value} />
-              <select onChange={(e) => type = e.target.value}>
+              <select id="itemDropdown" onChange={(e) => type = e.target.value}>
                 <option value="Any" selected>Any Item Type</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Electronics">Electronics</option>
@@ -170,7 +175,7 @@ const ItemTable = ({ userInfo, displayUserArray }) => {
               <input type="button" value="Search" onClick={searchItems} />
             </form>
           </div>
-         
+
           <div className="item-table">
             {Object.keys(listOfItems).map((index) => {
               return (
