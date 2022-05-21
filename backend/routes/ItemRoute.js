@@ -24,7 +24,7 @@ router.post("/addItem", checkUserLoggedIn, async (req, res) => {
       status: "Ok",
       message: "Item added to User Posted",
     });
-  } catch (error ) {
+  } catch (error) {
     if (!htmlCode) {
       htmlCode = 422;
     }
@@ -63,12 +63,11 @@ router.get("/getItem/:_id", checkUserLoggedIn, async (req, res) => {
 
 router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
   try {
-
     // Get Info the user that wants to search for Items
     const userInfo = await userModel.getUserByObjectId(req.query.userId)
-    const allItems = await itemModel.getAllItems()
 
-    let listItemIds = allItems.map((elem) => elem._id)
+    // Get only the Object Id of the all the items
+    let listItemIds = null
     // console.log(listItemIds)
     // Depending on display type, get that list for from user information
     if (req.query.displayType === "posted") {
@@ -78,8 +77,10 @@ router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
     } else if (req.query.displayType === "bought") {
       listItemIds = userInfo.items_bought
     }
-    console.log
-    data = await itemModel.searchItems(req.query.input, req.query.type, listItemIds);
+
+    // If Display, only get items not posted by user
+    const data = await itemModel.searchItems(req.query.input, req.query.type, listItemIds);
+
     res.json({
       itemData: data,
     });

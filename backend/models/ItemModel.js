@@ -22,7 +22,7 @@ const getItem = async (id) => {
 
 const searchItems = async (query, type, listItemIds) => {
 
-  // Check of listItemIds do not exist
+  // Check ff listItemIds does not exist
   if (listItemIds === null || listItemIds === undefined) {
     return await [];
   }
