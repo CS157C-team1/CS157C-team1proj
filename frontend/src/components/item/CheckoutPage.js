@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Alert } from "react-bootstrap";
 import axios from "axios";
 import PropTypes from "prop-types";
 import CheckoutRow from "./CheckoutRow";
@@ -6,6 +7,7 @@ import CheckoutRow from "./CheckoutRow";
 const CheckoutPage = ({}) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   // Gets Object Ids of items of user in cart
   const getItemsInCart = async () => {
@@ -16,7 +18,6 @@ const CheckoutPage = ({}) => {
         })
         .then((res) => {
           // Get Actual Item Collection information
-          console.log(res.data.cartItems);
           getItemInfo(res.data.cartItems);
         });
     } catch (error) {
@@ -24,10 +25,21 @@ const CheckoutPage = ({}) => {
     }
   };
 
+  const buyItemsInCart = async () => {
+    try {
+      const instance = axios.create({ withCredentials: true });
+      await instance.put(`${process.env.REACT_APP_BASE_BACKEND}/api/item/buyItems`).then((res) => {
+        setShowAlert(true)
+        // setCartItems([])
+      })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   // Gets actual item information from item collection from obj ids
   const getItemInfo = async (listOfObjIds) => {
     // If there are no items in cart, set the array to false
-    if(listOfObjIds.length == 0) {
+    if (listOfObjIds.length == 0) {
       listOfObjIds = false
     }
     try {
@@ -50,10 +62,16 @@ const CheckoutPage = ({}) => {
 
   useEffect(() => {
     getItemsInCart();
-  }, []);
+  }, [showAlert]);
 
   return (
     <>
+      {showAlert && (
+        <Alert key="success" variant="success" onClose={() => setShowAlert(false)} dismissible>
+          Item Checkout was Successful
+        </Alert>
+      )}
+
       {cartItems == null || cartItems.length == 0 ? (
         <div className="checkout-page-div-left">
           <h1>Checkout Page: </h1>
@@ -100,7 +118,7 @@ const CheckoutPage = ({}) => {
                 </h1>
               </div>
             </div>
-            <button className="btn">Checkout</button>
+            <button className="btn" onClick={buyItemsInCart}>Checkout</button>
           </div>
         </>
       )}

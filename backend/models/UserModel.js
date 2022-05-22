@@ -103,6 +103,33 @@ const addItemToPosted = async (userObjId, itemObjID) => {
   });
 }
 
+// Item has been bought so remove all item from all wishlist and
+// item cart in database. Additionally, move item from posted to sold
+// for user that bought the item
+const removeItemsFromCartAndWish = async (listOfItemIds) => {
+  await userCollection.updateMany({}, { $pull: { wishlist: { $in: listOfItemIds }, itemCart: { $in: listOfItemIds } } })
+}
+
+// Move item from posted to sold for user that bought the item
+const userSoldItem = async (userId, itemId) => {
+  const filter = { _id: ObjectId(userId) }
+  const updateDocument = {
+    $addToSet: { items_sold: ObjectId(itemId) }
+    // $pull: { items_post: ObjectId(itemId) }
+  };
+
+  await userCollection.updateOne(filter, updateDocument)
+}
+
+const userBoughtItem = async (userId, listOfItemIds) => {
+  const filter = { _id: ObjectId(userId) }
+
+  const finalList = listOfItemIds.map((x) => ObjectId(x));
+  console.log(finalList)
+  const updateDocument = { $push: { items_bought: { $each: finalList } } };
+
+  await userCollection.updateOne(filter, updateDocument)
+}
 module.exports = {
   getAllUsersCol,
   insertUserCol,
@@ -115,5 +142,8 @@ module.exports = {
   removeItemsFromWishList,
   getItemsFromPosted,
   getUserByObjectId,
-  addItemToPosted
+  addItemToPosted,
+  removeItemsFromCartAndWish,
+  userSoldItem,
+  userBoughtItem
 };

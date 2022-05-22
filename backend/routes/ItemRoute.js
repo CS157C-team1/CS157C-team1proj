@@ -185,4 +185,29 @@ router.get("/getItemsBought", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+// Buy Items in users cart.
+router.put("/buyItems", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null
+  try {
+    
+    const listOfItemInformation = await itemModel.getItemsByObjId(req.user.itemCart)
+    for (const itemInfo of listOfItemInformation) {
+      await userModel.userSoldItem(itemInfo.seller, itemInfo._id)
+    }    
+    await userModel.removeItemsFromCartAndWish(req.user.itemCart)
+    await userModel.userBoughtItem(req.user._id, req.user.itemCart)
+    
+    await itemModel.itemsBought(req.user.itemCart)
+    res.json({
+      status: "Ok",
+      message: "Able to Buy Items",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+})
+
 module.exports = router;

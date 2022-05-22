@@ -11,7 +11,7 @@ const getAllItems = async () => {
 };
 
 const getAllItemIds = async () => {
-  
+
 }
 const getItem = async (id) => {
   var o_id = new ObjectId(id);
@@ -103,6 +103,12 @@ const addItem = async (itemInfo) => {
   });
 }
 
+const itemsBought = async (listOfItemIds) => {
+  const finalList = listOfItemIds.map((x) => ObjectId(x));
+  const filter = { _id: { $in: finalList } }
+  const update = { $set: { sold: true } }
+  itemCollection.updateMany(filter, update)
+}
 module.exports = {
   getAllItems,
   getItemsByObjId,
@@ -111,5 +117,6 @@ module.exports = {
   getItem,
   searchItems,
   getItemsForDisplay,
-  addItem
+  addItem,
+  itemsBought
 };
