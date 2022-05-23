@@ -23,7 +23,7 @@ const AddItemModal = ({ showModal, setShowModal }) => {
     console.log(newItem)
     const instance = axios.create({ withCredentials: true })
     setShowModal(false)
-    await instance.post(`${process.env.REACT_APP_BASE_BACKEND}/api/user/editUserInfo`, newItem)
+    await instance.post(`${process.env.REACT_APP_BASE_BACKEND}/api/item/addItem`, newItem)
       .then(() => {
         setShowModal(false)
       })

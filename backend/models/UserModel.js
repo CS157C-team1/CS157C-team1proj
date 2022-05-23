@@ -21,10 +21,8 @@ const insertUserCol = async (user) => {
 };
 
 const editUserInfo = async (userId, newUserInfo) => {
-  console.log(newUserInfo)
   const filter = { _id: ObjectId(userId) };
   const updateDoc = { $set: newUserInfo };
-  console.log(updateDoc)
   await userCollection.updateOne(filter, updateDoc)
 }
 const getUserByEmailCol = async (email) => {
