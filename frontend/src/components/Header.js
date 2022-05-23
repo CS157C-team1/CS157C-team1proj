@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import GoogleLogoutComponent from "./google/GoogleLogoutComponent";
 import GoogleLoginComponent from "./google/GoogleLoginComponent";
-import AddItemModal from "./modals/AddItemModal";
+import ItemInfoModal from "./modals/ItemInfoModal";
 import shoppingCart from "../images/shoppingCart.png";
 import wishListIcon from "../images/wishIcon.png";
 import { Link } from "react-router-dom";
@@ -53,7 +53,7 @@ const Header = ({ isUserLoggedOn, updateUser, userInfo }) => {
           )}
         </div>
       </div>
-      <AddItemModal showModal={showModal} setShowModal={setShowModal} />
+      <ItemInfoModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

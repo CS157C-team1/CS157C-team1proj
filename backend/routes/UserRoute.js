@@ -29,6 +29,23 @@ router.get("/getUserById", checkUserLoggedIn, async (req, res) => {
   }
 });
 
+router.put("/editUserInfo", checkUserLoggedIn, async (req, res) => {
+  let htmlCode = null;
+  try {
+    // console.log(req.body)
+    userModel.editUserInfo(req.user._id, req.body)
+    res.json({
+      status: "Ok",
+      message: "User Info Edited",
+    });
+  } catch (error) {
+    if (!htmlCode) {
+      htmlCode = 422;
+    }
+    res.status(htmlCode).json(htmlError(error.message, htmlCode));
+  }
+})
+
 // Add item to Cart of the User using the ObjectID
 router.post("/addCart/:itemId", checkUserLoggedIn, async (req, res) => {
   let htmlCode = null;
