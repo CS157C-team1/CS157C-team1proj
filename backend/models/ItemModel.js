@@ -109,6 +109,7 @@ const itemsBought = async (listOfItemIds) => {
   const update = { $set: { sold: true } }
   itemCollection.updateMany(filter, update)
 }
+
 module.exports = {
   getAllItems,
   getItemsByObjId,
