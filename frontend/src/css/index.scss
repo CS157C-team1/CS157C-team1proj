@@ -1,5 +1,7 @@
 @import "./variables";
 @import "./items";
+@import "./user";
+@import "./checkout";
 @import "./mixins";
 
 * {
@@ -21,6 +23,8 @@ body {
 
 .center-div {
   @include flexCenter();
+  flex-direction: column;
+  margin: 10px
 }
 
 .home-layout {
@@ -35,38 +39,39 @@ body {
 }
 
 .generic-card {
-  background-color: $cardBGColor;
+  background-color: $electricBlue;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
+  background-color: $electricBlue;
   padding: 10px;
   h1 {
     font-family: "Oswald", sans-serif;
     font-size: 64px;
+    color: white;
     margin: 0px;
+  }
+  button {
+    font-size: 32px;
   }
 }
 
 .btn {
-  border: solid;
-  font-size: 32px;
-  background-color: $cardBGColor;
-  cursor: pointer;
-  &:active {
-    transform: scale(0.95);
-  }
+  @include btn-general();
+  background-color: $shockingYellow;
+  font-size: 14px;
   &:hover {
-    background-color: $olive;
+    background-color: $chartreuse;
   }
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  height: 75px;
+  height: 50px;
   border-bottom: solid;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -78,6 +83,7 @@ body {
   h1 {
     font-family: "Bebas Neue", cursive;
     font-size: 64px;
+    color: white;
     margin: 0px;
   }
 }
@@ -85,12 +91,64 @@ body {
 .navBar {
   @include flexCenter();
   display: flex;
+  height: 66px;
   button {
-    width: fit-content;
-    height: fit-content;
     margin: 20px;
+    font-size: 24px;
+  }
+
+  img {
+    height: 30px;
+  };
+
+  .img-round {
+    border-radius: 50%;
+  }
+
+  .profile-pic {
+    height: 50px;
+  }
+  
+  .cart {
+    background-color: $shockingYellow;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $chartreuse;
+    }
+    // border: 3px;
+  }
+
+  .wish {
+    background-color: $hotPink;
+    border: solid;
+    border-color: black;
+    padding: 5px;
+    margin-right: 10px;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:hover {
+      background-color: $darkPink
+    }
+    // border: 3px;
   }
 }
+
+// .div-btn-disabled {
+//   @include btn-general;
+//   font-size: 14px;
+//   padding-left: 12px;
+//   padding-right: 12px;
+//   padding-top: 6px;
+//   padding-bottom: 6px;
+//   background-color: lightgray;
+//   cursor: not-allowed;
+// }
 
 // label {
 //     display: flex;
@@ -101,7 +159,7 @@ body {
 //     line-height: 26px;
 //     margin-bottom: 10px;
 //   }
-  
+
 //   input {
 //     height: 20px;
 //     flex: 0 0 200px;

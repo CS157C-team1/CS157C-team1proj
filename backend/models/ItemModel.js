@@ -11,6 +11,7 @@ const getAllItems = async () => {
 };
 
 const getAllItemIds = async () => {
+
   var ObjectId = require('mongodb').ObjectId; 
   var id = req.params.gonderi_id;       
   var o_id = new ObjectId(id);
@@ -18,6 +19,7 @@ const getAllItemIds = async () => {
   return await cursor.toArray().catch((error) => {
     throw new Error(error.message);
   });
+
 }
 const getItem = async (id) => {
   var o_id = new ObjectId(id);

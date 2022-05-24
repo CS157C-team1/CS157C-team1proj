@@ -1,18 +1,60 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald&display=swap");
 .item-display {
   border: solid 2px;
-  height: 425px;
-  width: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   margin: 10px;
   padding: 10px;
 }
 
-.item-img-size {
-  width: 300px;
-  height: 200px;
+.item-display .item-display-name {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.item-empty-image {
+.item-display .div-seller {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.item-display .div-seller img {
+  width: 20px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.item-display .div-seller h2 {
+  font-size: 18px;
+  margin: 0px;
+}
+
+.item-display .img-seller {
+  width: 20px;
+  border-radius: 50%;
+}
+
+.item-display h1 {
+  font-size: 24px;
+  color: red;
+}
+
+.item-display h2 {
+  font-size: 18px;
+}
+
+.item-display h3 {
+  font-size: 14px;
+}
+
+.item-img-size {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -22,14 +64,21 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 250px;
   border: solid 1px;
   border-radius: 25px;
+  margin: 5px;
   margin-bottom: 10px;
 }
 
-.item-empty-image h1 {
+.item-img-size h1 {
+  font-size: 32px;
   color: #B85042;
   text-align: center;
+}
+
+.item-empty-image {
+  height: 250px;
 }
 
 .item-table {
@@ -47,6 +96,299 @@
   padding: 0px;
   border: solid 2px;
   margin-top: 20px;
+}
+
+.item-btn-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.btn-wishlist {
+  border: solid;
+  font-size: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #f16775;
+  font-size: 14px;
+}
+
+.btn-wishlist:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.btn-wishlist:hover {
+  background-color: #d95d69;
+}
+
+.btn-remove {
+  border: solid;
+  font-size: 32px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+  cursor: pointer;
+  background-color: lightgray;
+  font-size: 14px;
+}
+
+.btn-remove:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.btn-remove:hover {
+  background-color: darkgray;
+}
+
+.search-bar form input {
+  margin-right: 5px;
+}
+
+.search-bar form select {
+  margin-right: 5px;
+}
+
+.user-info-display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  float: left;
+  background-image: -webkit-gradient(linear, left top, right top, from(#f16775), to(#fee36e));
+  background-image: linear-gradient(to right, #f16775, #fee36e);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 20%;
+  margin-top: 50px;
+  margin-left: 50px;
+  padding: 10px;
+  border-radius: 5%;
+  color: white;
+}
+
+.user-info-display img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  float: right;
+}
+
+.user-info-display .edit-icon {
+  width: 25px;
+  height: auto;
+  border-radius: 0%;
+  margin-bottom: -20px;
+  cursor: pointer;
+}
+
+.user-info-display div {
+  width: 100%;
+  float: left;
+}
+
+.user-info-display div .field {
+  float: left;
+}
+
+.user-info-display div .value {
+  float: right;
+}
+
+.user-info-display h3 {
+  font-size: 18px;
+}
+
+.user-items-info {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: left;
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.user-items-info .div-left {
+  float: left;
+  margin-top: -20px;
+}
+
+.user-items-info .user-nav-bar {
+  margin-bottom: 100px;
+}
+
+.user-items-info .user-nav-bar .div-yellow {
+  background-color: #fee36e;
+  border: solid;
+  border-color: black;
+}
+
+.user-items-info .user-nav-bar .div-yellow h2 {
+  color: black;
+}
+
+.user-items-info .user-nav-bar div {
+  float: left;
+  padding: 5px;
+  margin-right: 50px;
+}
+
+.checkout-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  margin-bottom: 10px;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.checkout-row .checkout-img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 250px;
+  width: 250px;
+  border: solid 1px;
+  border-radius: 25px;
+  margin: 10px;
+}
+
+.checkout-row .checkout-img h1 {
+  font-size: 32px;
+  color: #B85042;
+  text-align: center;
+}
+
+.checkout-row .item-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px;
+}
+
+.checkout-row .item-info h1 {
+  font-size: 32px;
+}
+
+.checkout-row .item-info h2 {
+  font-size: 24px;
+}
+
+.checkout-row .div-top-right {
+  height: 100%;
+}
+
+.checkout-row .div-top-right img {
+  float: right;
+  height: 25px;
+  margin: 10px;
+  width: auto;
+  cursor: pointer;
+}
+
+.checkout-page-div-left {
+  float: left;
+  margin: 10px;
+}
+
+.checkout-page-div-right {
+  float: right;
+  margin-left: 50px;
+  margin-top: 65px;
+  border: solid;
+  border-width: 2px;
+  border-color: #fee36e;
+  padding: 10px;
+}
+
+.checkout-page-div-right .div-title {
+  float: left;
+  margin-right: 50px;
+}
+
+.checkout-page-div-right .div-number {
+  float: right;
+  text-align: right;
+}
+
+.checkout-page-div-right h1 {
+  font-size: 24px;
+}
+
+.checkout-page-div-right h2 {
+  font-size: 16px;
 }
 
 * {
@@ -75,6 +417,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px;
 }
 
 .home-layout {
@@ -88,27 +435,44 @@ body {
 }
 
 .generic-card {
-  background-color: #A7BEAE;
+  background-color: #373e98;
 }
 
 .welcome-card {
   width: 500px;
   height: 350px;
   border: solid;
+  background-color: #373e98;
   padding: 10px;
 }
 
 .welcome-card h1 {
   font-family: "Oswald", sans-serif;
   font-size: 64px;
+  color: white;
   margin: 0px;
+}
+
+.welcome-card button {
+  font-size: 32px;
 }
 
 .btn {
   border: solid;
   font-size: 32px;
-  background-color: #A7BEAE;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
   cursor: pointer;
+  background-color: #fee36e;
+  font-size: 14px;
 }
 
 .btn:active {
@@ -117,7 +481,7 @@ body {
 }
 
 .btn:hover {
-  background-color: #E7E8D1;
+  background-color: #ceb92c;
 }
 
 .header {
@@ -127,7 +491,7 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 75px;
+  height: 50px;
   border-bottom: solid;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -142,6 +506,7 @@ body {
 .header h1 {
   font-family: "Bebas Neue", cursive;
   font-size: 64px;
+  color: white;
   margin: 0px;
 }
 
@@ -156,15 +521,56 @@ body {
       -ms-flex-align: center;
           align-items: center;
   display: flex;
+  height: 66px;
 }
 
 .navBar button {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   margin: 20px;
+  font-size: 24px;
+}
+
+.navBar img {
+  height: 30px;
+}
+
+.navBar .img-round {
+  border-radius: 50%;
+}
+
+.navBar .profile-pic {
+  height: 50px;
+}
+
+.navBar .cart {
+  background-color: #fee36e;
+  border: solid;
+  border-color: black;
+  padding: 5px;
+}
+
+.navBar .cart:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.navBar .cart:hover {
+  background-color: #ceb92c;
+}
+
+.navBar .wish {
+  background-color: #f16775;
+  border: solid;
+  border-color: black;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.navBar .wish:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.navBar .wish:hover {
+  background-color: #d95d69;
 }
 /*# sourceMappingURL=index.css.map */

@@ -1,28 +1,66 @@
 @import './mixins';
+@import './variables';
 
 .item-display {
     border: solid 2px;
-    height: 425px;
-    width: 300px;
+    height: fit-content;
+    width: fit-content;
     margin: 10px;
     padding: 10px;
+
+    .item-display-name {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .div-seller {
+        margin-bottom: 10px;
+        cursor: pointer;
+        img {
+            width: 20px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 10px;
+        }
+
+        h2{
+            font-size: 18px;
+            margin: 0px;
+        }
+    }
+    .img-seller {
+        width: 20px;
+        border-radius: 50%;
+    }
+
+    h1 {
+        font-size: 24px;
+        color: red;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 14px;
+    }
 }
 
 .item-img-size {
-    width: 300px;
-    height: 200px;
-}
-
-.item-empty-image {
     @include flexCenter();
+    width: 250px;
     border: solid 1px;
     border-radius: 25px;
+    margin: 5px;
     margin-bottom: 10px;
-    
     h1 {
+        font-size: 32px;
         color: $scarlet;
         text-align: center;
     }
+}
+
+.item-empty-image {
+    height: 250px;
 }
 
 .item-table {
@@ -30,8 +68,47 @@
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    // grid-template-rows: repeat(auto-fill);
     gap: 10px;
     padding: 0px;
     border: solid 2px;
     margin-top: 20px;
+}
+
+.item-btn-div{
+    @include flexCenter();
+    flex-direction: column;
+    width: auto;
+    height: fit-content;
+}
+
+.btn-wishlist {
+    @include btn-general();
+    margin-top: 10px;
+    background-color: $hotPink;
+    font-size: 14px;
+    &:hover {
+        background-color: $darkPink;
+    }
+}
+
+.btn-remove {
+    @include btn-general();
+    background-color: lightgray;
+    font-size: 14px;
+    &:hover{
+        background-color: darkgray;
+    }
+}
+
+.search-bar {
+    form {
+        input {
+            margin-right: 5px;
+        }
+
+        select {
+            margin-right: 5px;
+        } 
+    }
 }
