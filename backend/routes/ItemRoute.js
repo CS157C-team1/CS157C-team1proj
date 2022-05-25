@@ -1,6 +1,7 @@
 // Routers
 const e = require("express");
 const express = require("express");
+const { ObjectId } = require("mongodb");
 const router = express.Router();
 
 // Errors
@@ -67,8 +68,8 @@ router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
     const userInfo = await userModel.getUserByObjectId(req.query.userId)
 
     // Get only the Object Id of the all the items
-    let listItemIds = null
-    // console.log(listItemIds)
+    let listItemIds = await itemModel.getAllItems()
+    listItemIds = listItemIds.map((x) => ObjectId(x._id))
     // Depending on display type, get that list for from user information
     if (req.query.displayType === "posted") {
       listItemIds = userInfo.items_post
@@ -77,7 +78,6 @@ router.get("/searchItems", checkUserLoggedIn, async (req, res) => {
     } else if (req.query.displayType === "bought") {
       listItemIds = userInfo.items_bought
     }
-
     // If Display, only get items not posted by user
     const data = await itemModel.searchItems(req.query.input, req.query.type, listItemIds);
 
